@@ -33,5 +33,26 @@
     "url": "https://frayfight.com/game/",
     "thumbnail": "https://cdn.playsaurus.com/build/assets/fray-fight-screenshot-Bn13KvoA.png",
     "description": "A survivors-like action roguelite. Fight against endless waves of Vikings and monsters."
+  },
+  {
+    "id": "head-soccer-2022",
+    "name": "Head Soccer 2022",
+    "url": "https://www.onlinegames.io/games/2023/construct/280/head-soccer-2022/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/624/responsive/Head-Soccer-2022-lg.jpg",
+    "description": "A fast-paced soccer game where you use your head to score goals and win the tournament!"
+  },
+  {
+    "id": "basketball-king",
+    "name": "Basketball King",
+    "url": "https://cloud.onlinegames.io/games/2024/construct/316/basketball-king/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/907/responsive/basketball-king-lg.jpg",
+    "description": "Test your shooting skills and become the ultimate Basketball King in this addictive sports game."
+  },
+  {
+    "id": "rooftop-duel",
+    "name": "Rooftop Duel",
+    "url": "https://cloud.onlinegames.io/games/2025/construct/213/rooftop-duel/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1002/responsive/Rooftop-Duel-Online-lg.jpg",
+    "description": "Engage in intense rooftop duels! Aim, shoot, and knock your opponent off the building."
   }
 ]
