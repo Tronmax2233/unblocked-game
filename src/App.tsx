@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Gamepad2, X, Ghost } from "lucide-react";
+import { Gamepad2, X, Ghost, Play, ShieldAlert } from "lucide-react";
 import { AdSense } from "./components/AdSense";
 import initialGamesData from "./data/games.json";
 
@@ -21,6 +21,12 @@ export default function App() {
   // Use a fallback empty array to prevent crashes if import fails
   const [games, setGames] = useState<Game[]>(initialGamesData || []);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
+  const [showInterstitial, setShowInterstitial] = useState(false);
+  
+  const handleGameSelect = (game: Game) => {
+    setSelectedGame(game);
+    setShowInterstitial(true);
+  };
   
   // Debug check
   useEffect(() => {
@@ -57,6 +63,15 @@ export default function App() {
       {/* Hero Section */}
       <header className="px-6 py-12 md:py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mb-8"
+          >
+             <p className="text-[10px] text-frog-light font-bold uppercase tracking-widest mb-2 opacity-40">Top Advertisement</p>
+             <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '728px', height: '90px', margin: '0 auto' }} />
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -84,12 +99,20 @@ export default function App() {
         {games.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[250px]">
             {games.map((game, index) => (
-              <GameCard 
-                key={game.id} 
-                game={game} 
-                index={index} 
-                onClick={() => setSelectedGame(game)} 
-              />
+              <React.Fragment key={game.id}>
+                <GameCard 
+                  game={game} 
+                  index={index} 
+                  onClick={() => handleGameSelect(game)} 
+                />
+                {/* Insert an ad after the 4th game */}
+                {index === 3 && (
+                  <div className="md:col-span-2 flex flex-col items-center justify-center bento-card border-dashed">
+                     <p className="text-[10px] text-frog-light font-bold uppercase tracking-widest mb-2 opacity-40">Sponsored Content</p>
+                     <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '100%', height: '200px' }} />
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         ) : (
@@ -152,6 +175,35 @@ export default function App() {
             </div>
             
             <div className="flex-1 relative bg-black">
+              {showInterstitial ? (
+                <div className="absolute inset-0 z-10 bg-[#0a0c10] flex flex-col items-center justify-center p-8">
+                  <div className="max-w-xl w-full text-center space-y-8">
+                    <div className="space-y-2">
+                       <h5 className="text-2xl font-display font-bold text-frog-main">PREPARING YOUR POND...</h5>
+                       <p className="text-frog-light text-sm italic">Ad supports our free gaming curation</p>
+                    </div>
+                    
+                    <div className="bg-frog-dark border border-white/5 rounded-2xl p-4 min-h-[300px] flex flex-col items-center justify-center">
+                      <p className="text-[9px] text-white/20 uppercase font-black mb-4 tracking-tighter">Advertisement</p>
+                      <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '100%', minHeight: '250px' }} />
+                    </div>
+
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => setShowInterstitial(false)}
+                      className="group flex items-center gap-3 bg-frog-main text-black px-8 py-4 rounded-xl font-display font-black text-xl hover:shadow-[0_0_20px_rgba(101,255,143,0.3)] transition-all"
+                    >
+                      <Play className="w-5 h-5 fill-current" /> SKIP AD & PLAY
+                    </motion.button>
+                    
+                    <div className="flex items-center justify-center gap-2 text-[10px] text-frog-light/40 uppercase font-bold">
+                       <ShieldAlert className="w-3 h-3" /> Secure Connection Active
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
               <iframe
                 src={selectedGame.url}
                 className="w-full h-full border-none"
