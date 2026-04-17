@@ -148,6 +148,7 @@ export default function App() {
                 src={selectedGame.url}
                 className="w-full h-full border-none"
                 title={selectedGame.name}
+                allow="autoplay; payment; fullscreen; microphone; focus-without-user-activation; screen-wake-lock; gamepad; clipboard-read; clipboard-write;"
                 allowFullScreen
               />
             </div>

@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "id": "clicker-heroes",
+    "name": "Clicker Heroes",
+    "url": "https://cdn.clickerheroes.com/gamebuild/index.php",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/clicker-heroes-screenshot-KGuEurrO.png",
+    "description": "An epic idle clicker RPG! Tap to defeat monsters, hire heroes, and level up to unlock unique abilities."
+  },
+  {
+    "id": "mr-mine",
+    "name": "Mr. Mine",
+    "url": "https://mrmine.com/game/",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/mr-mine-screenshot-C7428jSK.png",
+    "description": "An addictive mining idle game by Playsaurus. Upgrade your drill, explore deep underground, and find rare treasures."
+  },
+  {
+    "id": "poker-quest",
+    "name": "Poker Quest",
+    "url": "https://playsaurus.com/kongPokerQuest63/",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/poker-quest-screenshot-BDFoidpq.png",
+    "description": "A fantasy roguelike where you fight through a world of monsters using a standard deck of playing cards."
+  },
+  {
+    "id": "grindcraft",
+    "name": "Grindcraft",
+    "url": "https://grindcraft.com/game.php",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/grindcraft-screenshot-DoZLcEWg.png",
+    "description": "A craft-them-all idle game inspired by Minecraft. Grind for resources and craft your way to victory."
+  },
+  {
+    "id": "fray-fight",
+    "name": "Fray Fight",
+    "url": "https://frayfight.com/game/",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/fray-fight-screenshot-Bn13KvoA.png",
+    "description": "A survivors-like action roguelite. Fight against endless waves of Vikings and monsters."
+  }
+]
