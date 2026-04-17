@@ -17,15 +17,10 @@ interface Game {
 }
 
 export default function App() {
-  const [games, setGames] = useState<Game[]>([]);
+  const [games, setGames] = useState<Game[]>(initialGamesData);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   
-  // Load games (Fixed List)
-  useEffect(() => {
-    // Only use initial data for a fixed curated pond
-    setGames(initialGamesData);
-  }, []);
-
+  // No longer need useEffect to set initial data
   return (
     <div className="min-h-screen font-sans bg-frog-dark">
       {/* Navigation */}
