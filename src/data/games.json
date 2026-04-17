@@ -348,5 +348,103 @@
     "url": "https://www.onlinegames.io/games/2021/unity/agent-smith/index.html",
     "thumbnail": "https://www.onlinegames.io/media/posts/189/responsive/Agent-Smith-2-lg.jpg",
     "description": "Engage in secret missions and take down enemies in this action-packed agent game."
+  },
+  {
+    "id": "finns-ascent",
+    "name": "Finn's Ascent",
+    "url": "https://www.finnsascent.com/",
+    "thumbnail": "https://cdn.webgamer.io/games/finns-ascent/finns-ascent.480x.50pc.avif",
+    "description": "Help Finn climb to new heights in this challenging and vertical adventure."
+  },
+  {
+    "id": "polytrack",
+    "name": "Polytrack",
+    "url": "https://www.kodub.com/apps/polytrack",
+    "thumbnail": "https://cdn.webgamer.io/games/polytrack/polytrack.480x.50pc.avif",
+    "description": "Speed through low-poly tracks in this minimalist racing experience."
+  },
+  {
+    "id": "killover",
+    "name": "Killover",
+    "url": "https://games.webgamer.io/killover/",
+    "thumbnail": "https://cdn.webgamer.io/games/killover/killover.480x.50pc.avif",
+    "description": "Intense action survival in a hostile environment."
+  },
+  {
+    "id": "chrome-shift-genesis",
+    "name": "Chrome Shift Genesis",
+    "url": "https://worlds.viverse.com/BdxcUtJ",
+    "thumbnail": "https://cdn.webgamer.io/games/chrome-shift-genesis/chrome-shift-genesis.480x.50pc.avif",
+    "description": "Explore futuristic worlds in this high-tech adventure."
+  },
+  {
+    "id": "ovivo",
+    "name": "Ovivo",
+    "url": "https://worlds.viverse.com/iv9gsHj",
+    "thumbnail": "https://cdn.webgamer.io/games/ovivo/ovivo.480x.50pc.avif",
+    "description": "A beautiful black and white platformer with unique gravity mechanics."
+  },
+  {
+    "id": "sentiel",
+    "name": "Sentiel",
+    "url": "https://worlds.viverse.com/Y6sht8h",
+    "thumbnail": "https://cdn.webgamer.io/games/sentiel/sentiel.480x.50pc.avif",
+    "description": "Defend your territory in this futuristic combat game."
+  },
+  {
+    "id": "bubbits",
+    "name": "Bubbits",
+    "url": "https://bubbits.io/",
+    "thumbnail": "https://cdn.webgamer.io/games/bubbits/bubbits.480x.50pc.avif",
+    "description": "Catch and pop bubbles in this addictive arcade game."
+  },
+  {
+    "id": "army-clash-io",
+    "name": "Army Clash IO",
+    "url": "https://armyclash.io/",
+    "thumbnail": "https://cdn.webgamer.io/games/army-clash-io/army-clash-io.480x.50pc.avif",
+    "description": "Build your army and clash with players in real-time strategy."
+  },
+  {
+    "id": "conq-io",
+    "name": "Conq IO",
+    "url": "https://www.conq.io/",
+    "thumbnail": "https://cdn.webgamer.io/games/conq-io/conq-io.480x.50pc.avif",
+    "description": "Conquer territories and expand your empire in this IO game."
+  },
+  {
+    "id": "dungeon-survivors",
+    "name": "Dungeon Survivors",
+    "url": "https://dungeon-survivors.netlify.app/",
+    "thumbnail": "https://cdn.webgamer.io/games/dungeon-survivors/dungeon-survivors-1.480x.50pc.avif",
+    "description": "How long can you survive the depths of the dungeon?"
+  },
+  {
+    "id": "2048",
+    "name": "2048",
+    "url": "https://play2048.co/",
+    "thumbnail": "https://cdn.webgamer.io/games/2048/2048.480x.50pc.avif",
+    "description": "The addictive tile-sliding puzzle game."
+  },
+  {
+    "id": "dungeons-n-ducks",
+    "name": "Dungeons 'n' Ducks",
+    "url": "https://dungeons-n-ducks.vercel.app/",
+    "thumbnail": "https://cdn.webgamer.io/games/dungeons-n-ducks/dungeons-n-ducks.480x.50pc.avif",
+    "description": "Quirky dungeon crawling with feathered heroes."
+  },
+  {
+    "id": "slow-roads",
+    "name": "Slow Roads",
+    "url": "https://slowroads.io/",
+    "thumbnail": "https://cdn.webgamer.io/games/slow-roads/slow-roads.480x.50pc.avif",
+    "description": "Relax and drive forever through procedurally generated scenery."
+  },
+  {
+    "id": "summer-afternoon",
+    "name": "Summer Afternoon",
+    "url": "https://summer-afternoon.vlucendo.com/",
+    "thumbnail": "https://cdn.webgamer.io/games/summer-afternoon/summer-afternoon.480x.50pc.avif",
+    "description": "Experience a peaceful summer afternoon in this artistic exploration."
   }
 ]
