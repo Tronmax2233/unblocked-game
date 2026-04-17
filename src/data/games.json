@@ -1,58 +1,212 @@
 [
   {
-    "id": "clicker-heroes",
-    "name": "Clicker Heroes",
-    "url": "https://cdn.clickerheroes.com/gamebuild/index.php",
-    "thumbnail": "https://cdn.playsaurus.com/build/assets/clicker-heroes-screenshot-KGuEurrO.png",
-    "description": "An epic idle clicker RPG! Tap to defeat monsters, hire heroes, and level up to unlock unique abilities."
+    "id": "block-blast",
+    "name": "Block Blast",
+    "url": "https://cloud.onlinegames.io/games/2024/unity3/block-blast/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/876/responsive/block-blast-lg.jpg",
+    "description": "A fun and addictive block puzzle game. Strategy and matching skills required!"
   },
   {
-    "id": "mr-mine",
-    "name": "Mr. Mine",
-    "url": "https://mrmine.com/game/",
-    "thumbnail": "https://cdn.playsaurus.com/build/assets/mr-mine-screenshot-C7428jSK.png",
-    "description": "An addictive mining idle game by Playsaurus. Upgrade your drill, explore deep underground, and find rare treasures."
+    "id": "stack-fire",
+    "name": "Stack Fire",
+    "url": "https://www.onlinegames.io/games/2021/unity/stack-fire-ball/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/184/responsive/Stack-Fire-Ball-Game-lg.jpg",
+    "description": "Smash through floating platforms and reach the bottom in this fast-paced arcade game."
   },
   {
-    "id": "poker-quest",
-    "name": "Poker Quest",
-    "url": "https://playsaurus.com/kongPokerQuest63/",
-    "thumbnail": "https://cdn.playsaurus.com/build/assets/poker-quest-screenshot-BDFoidpq.png",
-    "description": "A fantasy roguelike where you fight through a world of monsters using a standard deck of playing cards."
+    "id": "snaker-io",
+    "name": "Snaker.io",
+    "url": "https://cloud.onlinegames.io/games/2026/more/snaker-io/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1261/responsive/snaker-io-lg.webp",
+    "description": "The ultimate io snake challenge. Grow your snake and dominate the arena."
   },
   {
-    "id": "grindcraft",
-    "name": "Grindcraft",
-    "url": "https://grindcraft.com/game.php",
-    "thumbnail": "https://cdn.playsaurus.com/build/assets/grindcraft-screenshot-DoZLcEWg.png",
-    "description": "A craft-them-all idle game inspired by Minecraft. Grind for resources and craft your way to victory."
+    "id": "geometry-dash-freenova",
+    "name": "Geometry Dash Freezenova",
+    "url": "https://www.onlinegames.io/games/2023/q2/geometry-dash-freezenova/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/510/responsive/Geometry-Dash-FreezeNova-lg.jpg",
+    "description": "Jump, fly, and flip your way through dangerous passages and spiky obstacles."
   },
   {
-    "id": "fray-fight",
-    "name": "Fray Fight",
-    "url": "https://frayfight.com/game/",
-    "thumbnail": "https://cdn.playsaurus.com/build/assets/fray-fight-screenshot-Bn13KvoA.png",
-    "description": "A survivors-like action roguelite. Fight against endless waves of Vikings and monsters."
+    "id": "drunken-duel",
+    "name": "Drunken Duel",
+    "url": "https://www.onlinegames.io/games/2024/code/2/drunken-duel/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/698/responsive/Drunken-Duel-lg.jpg",
+    "description": "Intense physics-based shooting duel. Can you hit your target while swaying?"
   },
   {
-    "id": "head-soccer-2022",
-    "name": "Head Soccer 2022",
-    "url": "https://www.onlinegames.io/games/2023/construct/280/head-soccer-2022/index.html",
-    "thumbnail": "https://www.onlinegames.io/media/posts/624/responsive/Head-Soccer-2022-lg.jpg",
-    "description": "A fast-paced soccer game where you use your head to score goals and win the tournament!"
+    "id": "99-nights-forest",
+    "name": "99 Nights in the Forest",
+    "url": "https://cloud.onlinegames.io/games/2026/unity/99-nights-in-the-forest-survival/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1190/responsive/99-nights-in-the-forest-lg.webp",
+    "description": "Survive the dark forest for 99 nights. Craft, hunt, and build your base."
   },
   {
-    "id": "basketball-king",
-    "name": "Basketball King",
-    "url": "https://cloud.onlinegames.io/games/2024/construct/316/basketball-king/index-og.html",
-    "thumbnail": "https://www.onlinegames.io/media/posts/907/responsive/basketball-king-lg.jpg",
-    "description": "Test your shooting skills and become the ultimate Basketball King in this addictive sports game."
+    "id": "troll-level",
+    "name": "Troll Level",
+    "url": "https://cloud.onlinegames.io/games/2024/unity2/troll-level/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/857/responsive/troll-level-online-lg.jpg",
+    "description": "Expect the unexpected in this funny and troll-filled puzzle platformer."
   },
   {
-    "id": "rooftop-duel",
-    "name": "Rooftop Duel",
-    "url": "https://cloud.onlinegames.io/games/2025/construct/213/rooftop-duel/index-og.html",
-    "thumbnail": "https://www.onlinegames.io/media/posts/1002/responsive/Rooftop-Duel-Online-lg.jpg",
-    "description": "Engage in intense rooftop duels! Aim, shoot, and knock your opponent off the building."
+    "id": "velocity-rush",
+    "name": "Velocity Rush",
+    "url": "https://cloud.onlinegames.io/games/2026/unity/velocity-rush/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1265/responsive/velocity-rush-lg.webp",
+    "description": "High-octane racing and velocity. Fast cars and challenging tracks await."
+  },
+  {
+    "id": "mob-city",
+    "name": "Mob City",
+    "url": "https://www.onlinegames.io/games/2021/unity3/mob-city/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/418/responsive/Mob-City-lg.jpg",
+    "description": "Dominate the urban underworld in this strategic crime simulator."
+  },
+  {
+    "id": "backflip-challenge",
+    "name": "Backflip Challenge",
+    "url": "https://cloud.onlinegames.io/games/2026/unity/backflip-challenge/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1203/responsive/backflip-challenge-lg.webp",
+    "description": "Master the art of the backflip in various locations and settings."
+  },
+  {
+    "id": "crazy-drifter",
+    "name": "Crazy Drifter",
+    "url": "https://www.onlinegames.io/games/2022/unity3/crazy-drifter/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/314/responsive/Crazy-Drifter-lg.jpg",
+    "description": "Show off your drift skills on narrow city streets and open tracks."
+  },
+  {
+    "id": "sniper-elite",
+    "name": "Sniper Elite",
+    "url": "https://www.onlinegames.io/games/2021/1/sniper-elite/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/127/responsive/Sniper-Elite-Online-lg.jpg",
+    "description": "Take down targets from afar with precision and skill in this sniping game."
+  },
+  {
+    "id": "crazy-hill-climb",
+    "name": "Crazy Hill Climb",
+    "url": "https://www.onlinegames.io/games/2023/construct/209/crazy-hill-climb/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/520/responsive/Crazy-Hill-Climb-lg.jpg",
+    "description": "Climb steepest hills with crazy vehicles and collect coins to upgrade."
+  },
+  {
+    "id": "limousine-simulator",
+    "name": "Limousine Simulator",
+    "url": "https://www.onlinegames.io/games/2021/4/limousine-simulator/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/701/responsive/Limousine-Simulator-lg.jpg",
+    "description": "Experience the life of a luxury limo driver in a busy city environment."
+  },
+  {
+    "id": "deer-hunter",
+    "name": "Deer Hunter",
+    "url": "https://www.onlinegames.io/games/2021/1/deer-hunter/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/591/responsive/Deer-Hunter-lg.jpg",
+    "description": "The ultimate hunting simulation. Track and hunt wildlife in the wilderness."
+  },
+  {
+    "id": "darkness-survivors",
+    "name": "Darkness Survivors",
+    "url": "https://www.onlinegames.io/games/2024/q2/darkness-survivors/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/696/responsive/Darkness-Survivors-lg.jpg",
+    "description": "Fight off shadows and survive the night in this challenging action game."
+  },
+  {
+    "id": "highway-cars",
+    "name": "Highway Cars",
+    "url": "https://www.onlinegames.io/games/2023/construct/211/highway-cars/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/598/responsive/Highway-Cars-lg.jpg",
+    "description": "Speed through highway traffic and avoid collisions in high-speed cars."
+  },
+  {
+    "id": "motorbike-stunt-simulator",
+    "name": "Motorbike Stunt Simulator",
+    "url": "https://cloud.onlinegames.io/games/2021/unity/motorbike-stunt-simulator/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1045/responsive/motorbike_stunt_simulator_game-2-lg.webp",
+    "description": "Perform daring stunts and jumps with powerful motorcycles."
+  },
+  {
+    "id": "car-football",
+    "name": "Car Football",
+    "url": "https://www.onlinegames.io/games/2023/construct/198/car-football/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/405/responsive/Car-Football-lg.jpg",
+    "description": "Soccer meets motor racing. Score goals using high-speed customized cars."
+  },
+  {
+    "id": "basket-hoop",
+    "name": "Basket Hoop",
+    "url": "https://cloud.onlinegames.io/games/2024/construct/311/basket-hoop/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/843/responsive/Basket-Hoop-lg.jpg",
+    "description": "Perfect your basketball shots and aim for the hoop in this arcade game."
+  },
+  {
+    "id": "burnout-city",
+    "name": "Burnout City",
+    "url": "https://cloud.onlinegames.io/games/2024/unity/burnout-city/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/861/responsive/burnoutcity-lg.jpg",
+    "description": "Evade the police and cause chaos in the urban streets of Burnout City."
+  },
+  {
+    "id": "checkout-frenzy",
+    "name": "Checkout Frenzy",
+    "url": "https://cloud.onlinegames.io/games/2025/unity/checkout-frenzy/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/974/responsive/checkout-frenzy-cashier-game-lg.jpg",
+    "description": "Scan items and manage the checkout line in this frantic shopping game."
+  },
+  {
+    "id": "fast-food-rush",
+    "name": "Fast Food Rush",
+    "url": "https://cloud.onlinegames.io/games/2025/unity/fast-food-rush/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/979/responsive/fast-food-rush-lg.jpg",
+    "description": "Cook and serve fast food as quickly as possible to hungry customers."
+  },
+  {
+    "id": "basketball-io",
+    "name": "Basketball.io",
+    "url": "https://www.onlinegames.io/games/2022/unity3/basketball-io/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/302/responsive/Basketball-io-2-lg.jpg",
+    "description": "Clash with other players in a fast-paced basketball multiplayer arena."
+  },
+  {
+    "id": "geometry-vector",
+    "name": "Geometry Vector",
+    "url": "https://cloud.onlinegames.io/games/2026/construct/329/geometry-vector/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1246/responsive/geometry-vector-lg.webp",
+    "description": "Navigate through vector-styled geometry landscapes full of neon obstacles."
+  },
+  {
+    "id": "police-chase-drifter",
+    "name": "Police Chase Drifter",
+    "url": "https://www.onlinegames.io/games/2021/3/police-chase-drifter/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/155/responsive/Police-Chase-Drifter-Online-lg.jpg",
+    "description": "Drift away from the police in high-speed chases across the city."
+  },
+  {
+    "id": "monster-truck-mountain-climb",
+    "name": "Monster Truck Mountain Climb",
+    "url": "https://cloud.onlinegames.io/games/2021/2/monster-truck-mountain-climb/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/924/responsive/monster-truck-mountain-climb-lg.jpg",
+    "description": "Crawl over mountains and rough terrain in massive monster trucks."
+  },
+  {
+    "id": "crazy-strike-force",
+    "name": "Crazy Strike Force",
+    "url": "https://www.onlinegames.io/games/2023/unity/crazy-strike-force/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/366/responsive/Crazy-Strike-Force-lg.jpg",
+    "description": "Engage in intense first-person combat against enemy strike forces."
+  },
+  {
+    "id": "gta-simulator",
+    "name": "GTA Simulator",
+    "url": "https://www.onlinegames.io/games/2023/unity2/gta-simulator/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/416/responsive/GTA-Simulator-lg.jpg",
+    "description": "Explore the open world city and engage in various criminal missions."
+  },
+  {
+    "id": "cat-simulator",
+    "name": "Cat Simulator",
+    "url": "https://www.onlinegames.io/games/2022/unity4/cat-simulator/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/330/responsive/Cat-Simulator-Online-lg.jpg",
+    "description": "Live the life of a mischievous cat. Explore the house and cause havoc."
   }
 ]

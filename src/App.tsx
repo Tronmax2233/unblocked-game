@@ -17,16 +17,84 @@ interface Game {
   description: string;
 }
 
+// Panic Mode Disguise Component (Wikipedia Style)
+function PanicModeDisguise({ onExit }: { onExit: () => void }) {
+  return (
+    <div className="fixed inset-0 z-[100] bg-white text-black font-serif overflow-y-auto selection:bg-[#3399ff] selection:text-white">
+      <div className="max-w-4xl mx-auto px-8 py-12">
+        <header className="border-b-2 border-slate-200 pb-4 mb-8">
+          <h1 className="text-4xl">Institutional Resource Portal</h1>
+          <p className="text-sm text-slate-500 mt-2 italic flex items-center gap-2">
+            <ShieldAlert className="w-3 h-3" /> Educational Access Validated • April 2026
+          </p>
+        </header>
+
+        <div className="flex gap-8">
+          <aside className="hidden md:block w-48 shrink-0 space-y-4 text-sm text-[#0645ad] border-r border-slate-100 pr-6">
+            <p className="font-bold text-black border-b border-slate-100 pb-1 uppercase text-[10px] tracking-wider">Site Navigation</p>
+            <p className="hover:underline cursor-pointer">Curriculum Overview</p>
+            <p className="hover:underline cursor-pointer">Faculty Research</p>
+            <p className="hover:underline cursor-pointer">Student Resources</p>
+            <p className="hover:underline cursor-pointer">Library Archives</p>
+          </aside>
+
+          <main className="flex-1 space-y-6">
+            <h2 className="text-2xl font-bold border-b border-slate-200 pb-2">Analysis of Advanced Pedagogy</h2>
+            <p className="leading-relaxed">
+              Computational logic in secondary education environments provides a framework for students to engage with 
+              complex problem-solving metrics. By utilizing structured algorithmic thinking, learners can bridge the gap 
+              between abstract theory and practical application.
+            </p>
+            <h3 className="text-xl font-bold">The Constructivist Approach</h3>
+            <p className="leading-relaxed">
+              Based on the works of Piaget and Papert, the modern educational system emphasizes the construction 
+              of knowledge through iterative exploration of digital tools. This "learning by doing" philosophy 
+              is instrumental in developing critical thinking skills necessary for the 21st-century workforce.
+            </p>
+            <div className="bg-slate-50 border-l-4 border-slate-300 p-4 font-sans text-sm italic text-slate-600">
+              "Technology is the scaffold, but inquiry is the foundation of genuine discovery."
+            </div>
+            <p className="leading-relaxed">
+              Recent comparative studies suggest that the integration of digital simulation tools enhances retention 
+              rates by approximately 34% when compared to traditional rote memorization techniques.
+            </p>
+          </main>
+        </div>
+      </div>
+      <button 
+        onClick={onExit}
+        className="fixed bottom-2 right-2 text-[6px] text-black/5 hover:text-black/50 transition-colors"
+      >
+        exit_disguise
+      </button>
+    </div>
+  );
+}
+
 export default function App() {
   // Use a fallback empty array to prevent crashes if import fails
   const [games, setGames] = useState<Game[]>(initialGamesData || []);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [showInterstitial, setShowInterstitial] = useState(false);
+  const [isPanicActive, setIsPanicActive] = useState(false);
   
   const handleGameSelect = (game: Game) => {
     setSelectedGame(game);
     setShowInterstitial(true);
   };
+
+  // Panic Mode Shortcut (Alt + P / Cmd + P)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Support Alt (Option on Mac) + P OR Command (Mac) + P
+      if ((e.altKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        setIsPanicActive(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
   
   // Debug check
   useEffect(() => {
@@ -37,7 +105,22 @@ export default function App() {
   }, [games]);
   return (
     <div className="min-h-screen font-sans bg-frog-dark">
-      {/* Navigation */}
+      {/* Panic Mode Overlay */}
+      <AnimatePresence>
+        {isPanicActive && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+            className="fixed inset-0 z-[100]"
+          >
+            <PanicModeDisguise onExit={() => setIsPanicActive(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Navigation - Sticky Logo Only */}
       <nav className="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border px-6 py-5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div 
@@ -53,6 +136,11 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4">
+            <div className="hidden md:flex flex-col items-end">
+              <span className="text-xl font-black text-frog-main uppercase tracking-tighter animate-pulse">Panic Mode Active</span>
+              <span className="text-sm text-frog-light opacity-90 uppercase font-bold">Press Alt+P or Cmd+P to hide</span>
+            </div>
+            <div className="h-6 w-[1px] bg-border mx-2 hidden sm:block"></div>
             <div className="text-[10px] text-frog-light font-bold uppercase tracking-[0.2em] opacity-30">
               v3.0 Secured Pond
             </div>
@@ -68,7 +156,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1 }}
             className="mb-8"
           >
-             <p className="text-[10px] text-frog-light font-bold uppercase tracking-widest mb-2 opacity-40">Top Advertisement</p>
+             <p className="text-[10px] text-frog-light font-bold uppercase tracking-widest mb-2 opacity-40">Featured Advertisement</p>
              <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '728px', height: '90px', margin: '0 auto' }} />
           </motion.div>
 
@@ -97,7 +185,7 @@ export default function App() {
         </div>
 
         {games.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[250px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[250px] grid-flow-dense">
             {games.map((game, index) => (
               <React.Fragment key={game.id}>
                 <GameCard 
@@ -105,11 +193,13 @@ export default function App() {
                   index={index} 
                   onClick={() => handleGameSelect(game)} 
                 />
-                {/* Insert an ad after the 4th game */}
-                {index === 3 && (
-                  <div className="md:col-span-2 flex flex-col items-center justify-center bento-card border-dashed">
-                     <p className="text-[10px] text-frog-light font-bold uppercase tracking-widest mb-2 opacity-40">Sponsored Content</p>
-                     <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '100%', height: '200px' }} />
+                {/* Insert an ad every 4 games */}
+                {(index + 1) % 4 === 0 && index !== games.length - 1 && (
+                  <div className="md:col-span-2 flex flex-col items-center justify-center bento-card bg-surface/30">
+                     <p className="text-[10px] text-frog-light font-bold uppercase tracking-widest mb-2 opacity-40 text-center">Sponsored Content</p>
+                     <div className="w-full flex justify-center">
+                        <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '100%', height: '200px' }} />
+                     </div>
                   </div>
                 )}
               </React.Fragment>
