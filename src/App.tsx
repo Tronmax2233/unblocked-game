@@ -5,8 +5,24 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Gamepad2, Search, X, Maximize2, Ghost, Trophy, Star, Plus, Trash2, Settings, LogIn, ShieldCheck } from "lucide-react";
-import initialGamesData from "./data/games.json";
+import { Gamepad2, X, Ghost, Plus, Trash2, ShieldCheck, LogIn, LogOut } from "lucide-react";
+import { 
+  db, 
+  auth, 
+  googleProvider, 
+  signInWithPopup, 
+  signOut, 
+  collection, 
+  onSnapshot, 
+  query, 
+  orderBy, 
+  addDoc, 
+  deleteDoc, 
+  doc,
+  handleFirestoreError,
+  OperationType 
+} from "./firebase";
+import { onAuthStateChanged, User } from "firebase/auth";
 
 interface Game {
   id: string;
@@ -21,12 +37,14 @@ const ADMIN_EMAIL = "farabi.reyhan@gmail.com";
 export default function App() {
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredGames, setFilteredGames] = useState<Game[]>([]);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   
   // Admin States
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdminModal, setShowAdminModal] = useState(false);
+  const [keySequence, setKeySequence] = useState<string[]>([]);
+  const SECRET_CODE = ["f", "r", "o", "g", "g", "y"]; // Secret code: froggy
+
   const [newGame, setNewGame] = useState<Partial<Game>>({
     name: "",
     url: "",
@@ -34,104 +52,143 @@ export default function App() {
     description: ""
   });
 
-  // Load games from Local Storage or fallback to JSON
+  // Listen for Auth Changes
   useEffect(() => {
-    const savedGames = localStorage.getItem("unblocked_frog_games");
-    if (savedGames) {
-      setGames(JSON.parse(savedGames));
-    } else {
-      setGames(initialGamesData);
-    }
-
-    // Auto-login admin if email matches (simulated for demo)
-    const savedAdmin = localStorage.getItem("frog_admin_active");
-    if (savedAdmin === "true") {
-      setIsAdmin(true);
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      if (user && user.email === ADMIN_EMAIL) {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
-  // Save games to Local Storage whenever games state changes
+  // Listen for Real-time Games Updates
   useEffect(() => {
-    if (games.length > 0) {
-      localStorage.setItem("unblocked_frog_games", JSON.stringify(games));
-    }
-  }, [games]);
+    const q = query(collection(db, "games"), orderBy("name", "asc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const gamesData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Game[];
+      setGames(gamesData);
+    }, (error) => {
+      handleFirestoreError(error, OperationType.LIST, "games");
+    });
 
+    return () => unsubscribe();
+  }, []);
+
+  // Key sequence listener for secret admin login access
   useEffect(() => {
-    const filtered = games.filter((game) =>
-      game.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredGames(filtered);
-  }, [searchQuery, games]);
-
-  const handleAddGame = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newGame.name || !newGame.url) return;
-
-    const gameToAdd: Game = {
-      id: Date.now().toString(),
-      name: newGame.name!,
-      url: newGame.url!,
-      thumbnail: newGame.thumbnail || `https://picsum.photos/seed/${newGame.name}/300/200`,
-      description: newGame.description || "A ribbiting game added by admin."
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const newSeq = [...keySequence, e.key.toLowerCase()].slice(-SECRET_CODE.length);
+      setKeySequence(newSeq);
+      
+      if (newSeq.join("") === SECRET_CODE.join("")) {
+        handleAdminLogin();
+        setKeySequence([]);
+      }
     };
 
-    const updatedGames = [...games, gameToAdd];
-    setGames(updatedGames);
-    localStorage.setItem("unblocked_frog_games", JSON.stringify(updatedGames));
-    
-    setNewGame({ name: "", url: "", thumbnail: "", description: "" });
-    setShowAdminModal(false);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [keySequence]);
+
+  const handleAdminLogin = async () => {
+    try {
+      if (!currentUser) {
+        await signInWithPopup(auth, googleProvider);
+      } else if (currentUser.email === ADMIN_EMAIL) {
+        alert("Pond Master mode active.");
+      } else {
+        alert("Only the designated Pond Master can add games.");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
-  const handleDeleteGame = (id: string, e: React.MouseEvent) => {
+  const handleLogout = () => {
+    signOut(auth);
+  };
+
+  const handleAddGame = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newGame.name || !newGame.url || !isAdmin) return;
+
+    try {
+      const gameData = {
+        name: newGame.name!,
+        url: newGame.url!,
+        thumbnail: newGame.thumbnail || `https://picsum.photos/seed/${newGame.name}/300/200`,
+        description: newGame.description || "A ribbiting game added by admin.",
+        createdAt: new Date().toISOString()
+      };
+
+      await addDoc(collection(db, "games"), gameData);
+      setNewGame({ name: "", url: "", thumbnail: "", description: "" });
+      setShowAdminModal(false);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, "games");
+    }
+  };
+
+  const handleDeleteGame = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!isAdmin) return;
     if (!confirm("Are you sure you want to delete this game?")) return;
-    const updatedGames = games.filter(g => g.id !== id);
-    setGames(updatedGames);
-    localStorage.setItem("unblocked_frog_games", JSON.stringify(updatedGames));
-  };
-
-  const toggleAdmin = () => {
-    const nextState = !isAdmin;
-    setIsAdmin(nextState);
-    localStorage.setItem("frog_admin_active", nextState.toString());
+    
+    try {
+      await deleteDoc(doc(db, "games", id));
+    } catch (error) {
+      handleFirestoreError(error, OperationType.DELETE, `games/${id}`);
+    }
   };
 
   return (
     <div className="min-h-screen font-sans bg-frog-dark">
-      {/* Admin Quick Toggle (for user testing) */}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
-         {isAdmin && (
-           <motion.button
-             initial={{ scale: 0 }}
-             animate={{ scale: 1 }}
-             onClick={() => setShowAdminModal(true)}
-             className="w-12 h-12 bg-frog-main rounded-full flex items-center justify-center text-black shadow-lg hover:rotate-90 transition-transform"
+      {/* Admin Floating Trigger (Hidden unless admin) */}
+      <AnimatePresence>
+        {isAdmin && (
+           <motion.div 
+             initial={{ scale: 0, y: 100 }}
+             animate={{ scale: 1, y: 0 }}
+             exit={{ scale: 0, y: 100 }}
+             className="fixed bottom-6 right-6 z-50 group"
            >
-             <Plus className="w-6 h-6" />
-           </motion.button>
+             <div className="absolute bottom-full right-0 mb-4 flex flex-col items-end gap-2">
+               <div className="bg-frog-main text-black text-[10px] font-black px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest shadow-xl">
+                  Admin Authorized: {currentUser?.email}
+               </div>
+               <button 
+                 onClick={handleLogout}
+                 className="bg-red-500 text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                 title="Logout Master Access"
+               >
+                 <LogOut className="w-4 h-4" />
+               </button>
+             </div>
+             <button
+               onClick={() => setShowAdminModal(true)}
+               className="w-14 h-14 bg-frog-main rounded-2xl flex items-center justify-center text-black shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:rotate-90 transition-transform active:scale-90"
+             >
+               <Plus className="w-8 h-8" />
+             </button>
+           </motion.div>
          )}
-         <button 
-           onClick={toggleAdmin}
-           className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all ${
-             isAdmin 
-             ? "bg-frog-main/20 border-frog-main text-frog-main" 
-             : "bg-white/5 border-white/10 text-white/40 hover:text-white"
-           }`}
-         >
-           {isAdmin ? "Admin Active" : "Admin Portal"}
-         </button>
-      </div>
+      </AnimatePresence>
 
-      {/* Navigation */}
-      <nav className="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border px-6 py-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      {/* Navigation - Simplified */}
+      <nav className="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border px-6 py-5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div 
             className="flex items-center gap-3 cursor-pointer group"
             onClick={() => setSelectedGame(null)}
           >
-            <div className="w-8 h-8 bg-frog-main rounded-lg flex items-center justify-center text-black font-black text-lg group-hover:rotate-12 transition-transform">
+            <div className="w-9 h-9 bg-frog-main rounded-xl flex items-center justify-center text-black font-black text-xl group-hover:rotate-12 transition-transform">
               F
             </div>
             <h1 className="text-2xl font-display font-extrabold tracking-tighter text-frog-main uppercase group-hover:scale-105 transition-transform">
@@ -139,35 +196,25 @@ export default function App() {
             </h1>
           </div>
 
-          <div className="relative w-full md:w-96 text-center">
+          <div className="flex items-center gap-4">
             {isAdmin && (
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 flex items-center gap-1 text-[9px] font-black text-frog-main uppercase">
-                <ShieldCheck className="w-2.5 h-2.5" /> Logged as {ADMIN_EMAIL}
+              <div className="flex items-center gap-2 bg-frog-main/5 border border-frog-main/20 px-3 py-1.5 rounded-full">
+                <ShieldCheck className="w-4 h-4 text-frog-main" />
+                <span className="text-[10px] font-bold text-frog-main uppercase tracking-widest">Master Mode</span>
               </div>
             )}
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-frog-light w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search games..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-surface border border-border rounded-full py-2 pl-10 pr-4 text-[#f1f5f9] placeholder:text-frog-light outline-none focus:ring-1 focus:ring-frog-main focus:border-frog-main transition-all text-sm"
-            />
-          </div>
-
-          <div className="hidden lg:flex items-center gap-6 text-sm font-semibold text-frog-light">
-            <span className="hover:text-frog-main cursor-pointer">Hot</span>
-            <span className="hover:text-frog-main cursor-pointer">New</span>
-            <span className="hover:text-frog-main cursor-pointer">Retro</span>
-            <span className="hover:text-frog-main cursor-pointer">Action</span>
-            {isAdmin && (
-              <button 
-                onClick={() => setShowAdminModal(true)}
-                className="flex items-center gap-2 bg-frog-main/10 text-frog-main border border-frog-main/20 px-3 py-1 rounded-md text-xs hover:bg-frog-main/20 transition-colors"
-              >
-                <Plus className="w-4 h-4" /> Add
-              </button>
+            {!currentUser && (
+               <button 
+                 onClick={() => setKeySequence([])} 
+                 className="text-[9px] text-white/10 uppercase tracking-widest hover:text-white/30 transition-colors"
+                 title="Pond secret sequence required"
+               >
+                 Locked
+               </button>
             )}
+            <div className="text-[10px] text-frog-light font-bold uppercase tracking-[0.2em] opacity-30">
+              v4.0 Central Pond
+            </div>
           </div>
         </div>
       </nav>
@@ -194,14 +241,14 @@ export default function App() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
             <Gamepad2 className="text-frog-main" />
-            <h3 className="text-2xl font-display font-bold">Recommended</h3>
+            <h3 className="text-2xl font-display font-bold">The Catalog</h3>
           </div>
-          <p className="text-sm text-frog-light">{filteredGames.length} games active</p>
+          <p className="text-sm text-frog-light">{games.length} games in pond</p>
         </div>
 
-        {filteredGames.length > 0 ? (
+        {games.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[250px]">
-            {filteredGames.map((game, index) => (
+            {games.map((game, index) => (
               <GameCard 
                 key={game.id} 
                 game={game} 
@@ -227,12 +274,7 @@ export default function App() {
                  Add Your First Game
                </button>
             ) : (
-               <button 
-                 onClick={toggleAdmin}
-                 className="text-frog-main border border-frog-main/30 px-6 py-2 rounded-lg font-bold hover:bg-frog-main/10"
-               >
-                 Claim Admin Mode
-               </button>
+               <p className="text-[10px] text-frog-light/20 uppercase tracking-[0.5em]">Waiting for Master Sequence</p>
             )}
           </div>
         )}

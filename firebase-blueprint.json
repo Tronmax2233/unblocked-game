@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "Game": {
+      "title": "Game",
+      "description": "Represents an unblocked game in the catalog.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "url"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile with role management.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/games/{gameId}": {
+      "schema": "Game",
+      "description": "Global catalog of unblocked games."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and permissions."
+    }
+  }
+}
