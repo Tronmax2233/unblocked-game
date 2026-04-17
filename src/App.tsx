@@ -5,24 +5,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Gamepad2, X, Ghost, Plus, Trash2, ShieldCheck, LogIn, LogOut } from "lucide-react";
-import { 
-  db, 
-  auth, 
-  googleProvider, 
-  signInWithPopup, 
-  signOut, 
-  collection, 
-  onSnapshot, 
-  query, 
-  orderBy, 
-  addDoc, 
-  deleteDoc, 
-  doc,
-  handleFirestoreError,
-  OperationType 
-} from "./firebase";
-import { onAuthStateChanged, User } from "firebase/auth";
+import { Gamepad2, Search, X, Maximize2, Ghost, Trophy, Star, Plus, Trash2, Settings, LogIn, ShieldCheck } from "lucide-react";
+import initialGamesData from "./data/games.json";
 
 interface Game {
   id: string;
@@ -37,7 +21,8 @@ const ADMIN_EMAIL = "farabi.reyhan@gmail.com";
 export default function App() {
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredGames, setFilteredGames] = useState<Game[]>([]);
   
   // Admin States
   const [isAdmin, setIsAdmin] = useState(false);
@@ -52,43 +37,18 @@ export default function App() {
     description: ""
   });
 
-  // Listen for Auth Changes
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      if (user && user.email === ADMIN_EMAIL) {
-        setIsAdmin(true);
-      } else {
-        setIsAdmin(false);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
-
-  // Listen for Real-time Games Updates
-  useEffect(() => {
-    const q = query(collection(db, "games"), orderBy("name", "asc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const gamesData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as Game[];
-      setGames(gamesData);
-    }, (error) => {
-      handleFirestoreError(error, OperationType.LIST, "games");
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  // Key sequence listener for secret admin login access
+  // Key sequence listener for secret admin mode
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const newSeq = [...keySequence, e.key.toLowerCase()].slice(-SECRET_CODE.length);
       setKeySequence(newSeq);
       
       if (newSeq.join("") === SECRET_CODE.join("")) {
-        handleAdminLogin();
+        setIsAdmin(prev => {
+          const newState = !prev;
+          localStorage.setItem("frog_admin_active", newState.toString());
+          return newState;
+        });
         setKeySequence([]);
       }
     };
@@ -97,55 +57,61 @@ export default function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [keySequence]);
 
-  const handleAdminLogin = async () => {
-    try {
-      if (!currentUser) {
-        await signInWithPopup(auth, googleProvider);
-      } else if (currentUser.email === ADMIN_EMAIL) {
-        alert("Pond Master mode active.");
-      } else {
-        alert("Only the designated Pond Master can add games.");
-      }
-    } catch (error) {
-      console.error("Login failed:", error);
+  // Load games from Local Storage or fallback to JSON
+  useEffect(() => {
+    const savedGames = localStorage.getItem("unblocked_frog_games");
+    if (savedGames) {
+      setGames(JSON.parse(savedGames));
+    } else {
+      setGames(initialGamesData);
     }
-  };
 
-  const handleLogout = () => {
-    signOut(auth);
-  };
+    const savedAdmin = localStorage.getItem("frog_admin_active");
+    if (savedAdmin === "true") {
+      setIsAdmin(true);
+    }
+  }, []);
 
-  const handleAddGame = async (e: React.FormEvent) => {
+  // Save games to Local Storage whenever games state changes
+  useEffect(() => {
+    if (games.length > 0) {
+      localStorage.setItem("unblocked_frog_games", JSON.stringify(games));
+    }
+  }, [games]);
+
+  useEffect(() => {
+    const filtered = games.filter((game) =>
+      game.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredGames(filtered);
+  }, [searchQuery, games]);
+
+  const handleAddGame = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newGame.name || !newGame.url || !isAdmin) return;
+    if (!newGame.name || !newGame.url) return;
 
-    try {
-      const gameData = {
-        name: newGame.name!,
-        url: newGame.url!,
-        thumbnail: newGame.thumbnail || `https://picsum.photos/seed/${newGame.name}/300/200`,
-        description: newGame.description || "A ribbiting game added by admin.",
-        createdAt: new Date().toISOString()
-      };
+    const gameToAdd: Game = {
+      id: Date.now().toString(),
+      name: newGame.name!,
+      url: newGame.url!,
+      thumbnail: newGame.thumbnail || `https://picsum.photos/seed/${newGame.name}/300/200`,
+      description: newGame.description || "A ribbiting game added by admin."
+    };
 
-      await addDoc(collection(db, "games"), gameData);
-      setNewGame({ name: "", url: "", thumbnail: "", description: "" });
-      setShowAdminModal(false);
-    } catch (error) {
-      handleFirestoreError(error, OperationType.CREATE, "games");
-    }
+    const updatedGames = [...games, gameToAdd];
+    setGames(updatedGames);
+    localStorage.setItem("unblocked_frog_games", JSON.stringify(updatedGames));
+    
+    setNewGame({ name: "", url: "", thumbnail: "", description: "" });
+    setShowAdminModal(false);
   };
 
-  const handleDeleteGame = async (id: string, e: React.MouseEvent) => {
+  const handleDeleteGame = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!isAdmin) return;
     if (!confirm("Are you sure you want to delete this game?")) return;
-    
-    try {
-      await deleteDoc(doc(db, "games", id));
-    } catch (error) {
-      handleFirestoreError(error, OperationType.DELETE, `games/${id}`);
-    }
+    const updatedGames = games.filter(g => g.id !== id);
+    setGames(updatedGames);
+    localStorage.setItem("unblocked_frog_games", JSON.stringify(updatedGames));
   };
 
   return (
@@ -159,17 +125,8 @@ export default function App() {
              exit={{ scale: 0, y: 100 }}
              className="fixed bottom-6 right-6 z-50 group"
            >
-             <div className="absolute bottom-full right-0 mb-4 flex flex-col items-end gap-2">
-               <div className="bg-frog-main text-black text-[10px] font-black px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest shadow-xl">
-                  Admin Authorized: {currentUser?.email}
-               </div>
-               <button 
-                 onClick={handleLogout}
-                 className="bg-red-500 text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
-                 title="Logout Master Access"
-               >
-                 <LogOut className="w-4 h-4" />
-               </button>
+             <div className="absolute bottom-full right-0 mb-4 bg-frog-main text-black text-[10px] font-black px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">
+                Admin Authorized: {ADMIN_EMAIL}
              </div>
              <button
                onClick={() => setShowAdminModal(true)}
@@ -203,17 +160,8 @@ export default function App() {
                 <span className="text-[10px] font-bold text-frog-main uppercase tracking-widest">Master Mode</span>
               </div>
             )}
-            {!currentUser && (
-               <button 
-                 onClick={() => setKeySequence([])} 
-                 className="text-[9px] text-white/10 uppercase tracking-widest hover:text-white/30 transition-colors"
-                 title="Pond secret sequence required"
-               >
-                 Locked
-               </button>
-            )}
             <div className="text-[10px] text-frog-light font-bold uppercase tracking-[0.2em] opacity-30">
-              v4.0 Central Pond
+              v3.0 Secure Pond
             </div>
           </div>
         </div>
@@ -241,14 +189,14 @@ export default function App() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
             <Gamepad2 className="text-frog-main" />
-            <h3 className="text-2xl font-display font-bold">The Catalog</h3>
+            <h3 className="text-2xl font-display font-bold">Recommended</h3>
           </div>
-          <p className="text-sm text-frog-light">{games.length} games in pond</p>
+          <p className="text-sm text-frog-light">{filteredGames.length} games active</p>
         </div>
 
-        {games.length > 0 ? (
+        {filteredGames.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[250px]">
-            {games.map((game, index) => (
+            {filteredGames.map((game, index) => (
               <GameCard 
                 key={game.id} 
                 game={game} 
