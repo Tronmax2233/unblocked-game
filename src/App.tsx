@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Gamepad2, X, Ghost } from "lucide-react";
+import { AdSense } from "./components/AdSense";
 import initialGamesData from "./data/games.json";
 
 interface Game {
@@ -100,6 +101,11 @@ export default function App() {
             <p className="text-frog-light mb-6 text-sm">Our frogs couldn't find what you're looking for.</p>
           </div>
         )}
+
+        <div className="mt-20 flex flex-col items-center">
+          <p className="text-[10px] text-frog-light font-bold uppercase tracking-widest mb-4 opacity-40">Sponsored</p>
+          <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" />
+        </div>
       </main>
 
       {/* Footer */}
