@@ -69,7 +69,7 @@ export const AdSense: React.FC<AdSenseProps> = ({ adClient, adSlot, style }) => 
   }, [adClient, adSlot]); // Re-run if client/slot changes (unlikely)
 
   return (
-    <div className="flex justify-center my-4 overflow-hidden w-full min-h-[50px]">
+    <div className="flex justify-center items-center overflow-hidden w-full h-full min-h-[50px]">
       <ins
         ref={adRef}
         className="adsbygoogle"

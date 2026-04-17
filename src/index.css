@@ -23,4 +23,9 @@
   .bento-card {
     @apply bg-surface border border-border rounded-[20px] transition-all duration-300;
   }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
 }

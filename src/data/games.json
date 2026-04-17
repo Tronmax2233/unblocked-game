@@ -208,5 +208,145 @@
     "url": "https://www.onlinegames.io/games/2022/unity4/cat-simulator/index.html",
     "thumbnail": "https://www.onlinegames.io/media/posts/330/responsive/Cat-Simulator-Online-lg.jpg",
     "description": "Live the life of a mischievous cat. Explore the house and cause havoc."
+  },
+  {
+    "id": "galactic-sniper",
+    "name": "Galactic Sniper",
+    "url": "https://www.onlinegames.io/games/2021/2/galactic-sniper/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/719/responsive/Galactic-Sniper-lg.jpg",
+    "description": "Engage in intergalactic sniping missions with futuristic precision."
+  },
+  {
+    "id": "stick-guys-defense",
+    "name": "Stick Guys Defense",
+    "url": "https://www.onlinegames.io/games/2022/unity3/stick-guys-defense/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/476/responsive/Stick-Guys-Defense-lg.jpg",
+    "description": "Defend your base with stickman warriors in this strategic tower defense."
+  },
+  {
+    "id": "funny-shooter-bro",
+    "name": "Funny Shooter Bro",
+    "url": "https://www.onlinegames.io/games/2024/unity/funny-shooter-bro/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/735/responsive/Funny-Shooter-Bro-lg.jpg",
+    "description": "Whacky first-person shooter with hilarious characters and weapons."
+  },
+  {
+    "id": "fnf-funk-3d",
+    "name": "FNF Funk 3D",
+    "url": "https://www.onlinegames.io/games/2022/unity/fnf-funk-3d/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/613/responsive/FNF-Funk-3D-lg.jpg",
+    "description": "A vibrant 3D take on the rhythm-classic Friday Night Funkin."
+  },
+  {
+    "id": "basketball-slam-dunk",
+    "name": "Basketball Slam Dunk",
+    "url": "https://www.onlinegames.io/games/2021/unity2/basketball-slam-dunk/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/200/responsive/Basketball-Slam-Dunk-lg.jpg",
+    "description": "Perform amazing slam dunks and master the basketball court."
+  },
+  {
+    "id": "among-impostor",
+    "name": "Among Impostor",
+    "url": "https://www.onlinegames.io/games/2023/construct/234/among-impostor/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/472/responsive/Among-Impostor-lg.jpg",
+    "description": "Find the impostor or sabotage the mission in this social deduction challenge."
+  },
+  {
+    "id": "tiny-crash-fighters",
+    "name": "Tiny Crash Fighters",
+    "url": "https://www.onlinegames.io/games/2023/construct/285/tiny-crash-fighters/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/622/responsive/Tiny-Crash-Fighters-lg.jpg",
+    "description": "Build your battle machine and crush your opponents in the arena."
+  },
+  {
+    "id": "spartahoppers",
+    "name": "SpartaHoppers",
+    "url": "https://cloud.onlinegames.io/games/2025/construct/227/spartahoppers/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/949/responsive/sparta-hoppers-game-lg.jpg",
+    "description": "Gladiator combat with a unique hopping mechanic. Fight for glory!"
+  },
+  {
+    "id": "toonz-io",
+    "name": "ToonZ io",
+    "url": "https://www.onlinegames.io/games/2021/unity3/toonz-io/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/230/responsive/Toonz-io-Game-lg.jpg",
+    "description": "Engage in toon-styled multiplayer battles in this action-packed io game."
+  },
+  {
+    "id": "crown-defense",
+    "name": "Crown Defense",
+    "url": "https://cloud.onlinegames.io/games/2025/construct/337/crown-defense/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1098/responsive/crown-defense-online-lg.webp",
+    "description": "Defend the crown from waves of enemies in this strategic defense game."
+  },
+  {
+    "id": "squid-race-simulator",
+    "name": "Squid Race Simulator",
+    "url": "https://www.onlinegames.io/games/2021/unity3/squid-race-simulator/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/950/responsive/squid-race-simulator-lg.jpg",
+    "description": "Survive the deadly race inspired by the popular survival series."
+  },
+  {
+    "id": "kick-the-dummy",
+    "name": "Kick The Dummy",
+    "url": "https://www.onlinegames.io/games/2022/construct/153/kick-the-dummy/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/414/responsive/Kick-The-Dummy-Game-lg.jpg",
+    "description": "Unleash your stress by kicking and hitting the physics-based dummy."
+  },
+  {
+    "id": "steal-brainrot-heist",
+    "name": "Steal Brainrot Heist",
+    "url": "https://cloud.onlinegames.io/games/2026/unity/steal-brainrot-heist/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1180/responsive/steal-brainrot-heist-2-lg.webp",
+    "description": "Infiltrate and heist in this whacky brainrot-themed adventure."
+  },
+  {
+    "id": "find-it",
+    "name": "Find It",
+    "url": "https://cloud.onlinegames.io/games/2025/unity/find-it/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/940/responsive/Find-It-lg.jpg",
+    "description": "Test your observation skills by finding hidden objects in complex scenes."
+  },
+  {
+    "id": "egg-helix",
+    "name": "Egg Helix",
+    "url": "https://www.onlinegames.io/games/2022/unity2/egg-helix/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/604/responsive/Egg-Helix-lg.jpg",
+    "description": "Drop the egg through the helix tower without breaking it."
+  },
+  {
+    "id": "pixelmon-town",
+    "name": "Pixelmon Town",
+    "url": "https://cloud.onlinegames.io/games/2025/html/pixelmon-town/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1214/responsive/pixelmon-town-lg.webp",
+    "description": "Explore a pixelated town full of monsters to catch and train."
+  },
+  {
+    "id": "age-of-battle",
+    "name": "Age Of Battle",
+    "url": "https://cloud.onlinegames.io/games/2026/unity/age-of-battle/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1201/responsive/age-of-battle-lg.webp",
+    "description": "Command your army through different ages of warfare."
+  },
+  {
+    "id": "fall-brainrots",
+    "name": "Fall Brainrots",
+    "url": "https://cloud.onlinegames.io/games/2026/unity/fall-brainrots/game.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1194/responsive/fall-brainrots-lg.webp",
+    "description": "Survive the falling obstacles in this chaotic brainrot-styled race."
+  },
+  {
+    "id": "draw-here",
+    "name": "Draw Here",
+    "url": "https://www.onlinegames.io/games/2021/unity2/draw-here/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/567/responsive/Draw-Here-lg.jpg",
+    "description": "Solve physics puzzles by drawing lines and shapes on the screen."
+  },
+  {
+    "id": "agent-smith",
+    "name": "Agent Smith",
+    "url": "https://www.onlinegames.io/games/2021/unity/agent-smith/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/189/responsive/Agent-Smith-2-lg.jpg",
+    "description": "Engage in secret missions and take down enemies in this action-packed agent game."
   }
 ]
