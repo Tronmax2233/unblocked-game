@@ -181,11 +181,14 @@ function GameCard({ game, index, onClick }: GameCardProps) {
         isLarge ? 'md:col-span-2 md:row-span-2' : ''
       }`}
     >
-      <div className={`overflow-hidden relative ${isLarge ? 'flex-1' : 'aspect-[16/10]'}`}>
+      <div className={`overflow-hidden relative bg-[#1c1f26] ${isLarge ? 'flex-1' : 'aspect-[16/10]'}`}>
         <img
           src={game.thumbnail}
           alt={game.name}
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${game.id}/400/300?blur=5`;
+          }}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
         
