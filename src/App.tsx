@@ -84,47 +84,17 @@ function PanicModeExcel() {
   );
 }
 
-function PanicModeCode() {
-  return (
-    <div className="h-full bg-[#1e1e1e] text-[#d4d4d4] font-mono text-sm p-6 space-y-4">
-      <div className="flex gap-4 text-xs text-slate-500 border-b border-slate-800 pb-2 mb-4">
-        <span className="text-blue-400">src/main.rs</span>
-        <span>Cargo.toml</span>
-        <span>README.md</span>
-      </div>
-      <div className="space-y-1">
-        <p><span className="text-purple-400">use</span> std::collections::HashMap;</p>
-        <p><span className="text-purple-400">use</span> tokio::sync::mpsc;</p>
-        <p><br /></p>
-        <p><span className="text-blue-400">#[tokio::main]</span></p>
-        <p><span className="text-purple-400">async fn</span> <span className="text-yellow-200">main</span>() {'{'}</p>
-        <p className="pl-4">    <span className="text-purple-400">let</span> (tx, <span className="text-purple-400">mut</span> rx) = mpsc::<span className="text-yellow-200">channel</span>(32);</p>
-        <p className="pl-4">    <span className="text-purple-400">let</span> <span className="text-purple-400">mut</span> state = HashMap::<span className="text-yellow-200">new</span>();</p>
-        <p><br /></p>
-        <p className="pl-4">    <span className="text-slate-500">// Initialize cluster validation protocol</span></p>
-        <p className="pl-4">    tokio::<span className="text-yellow-200">spawn</span>(<span className="text-purple-400">async move</span> {'{'}</p>
-        <p className="pl-8">        <span className="text-purple-400">while let</span> <span className="text-yellow-200">Some</span>(msg) = rx.<span className="text-yellow-200">recv</span>().<span className="text-purple-400">await</span> {'{'}</p>
-        <p className="pl-12">            <span className="text-yellow-200">println!</span>(<span className="text-green-300">"Received signal: {'{:?}'}"</span>, msg);</p>
-        <p className="pl-8">        {'}'}</p>
-        <p className="pl-4">    {'}'});</p>
-        <p>{'}'}</p>
-      </div>
-    </div>
-  );
-}
-
 function PanicModeDisguise({ onExit }: { onExit: () => void }) {
-  const [variant] = useState(() => Math.floor(Math.random() * 3));
+  const [variant] = useState(() => Math.floor(Math.random() * 2));
   
   return (
     <div className="fixed inset-0 z-[100] bg-white text-black overflow-hidden selection:bg-[#3399ff] selection:text-white">
       {variant === 0 && <PanicModeWikipedia />}
       {variant === 1 && <PanicModeExcel />}
-      {variant === 2 && <PanicModeCode />}
       
       <button 
         onClick={onExit}
-        className={`fixed bottom-2 right-2 text-[6px] transition-colors ${variant === 2 ? 'text-white/5 hover:text-white/50' : 'text-black/5 hover:text-black/50'}`}
+        className="fixed bottom-2 right-2 text-[6px] transition-colors text-black/5 hover:text-black/50"
       >
         exit_disguise
       </button>
