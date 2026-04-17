@@ -17,10 +17,17 @@ interface Game {
 }
 
 export default function App() {
-  const [games, setGames] = useState<Game[]>(initialGamesData);
+  // Use a fallback empty array to prevent crashes if import fails
+  const [games, setGames] = useState<Game[]>(initialGamesData || []);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   
-  // No longer need useEffect to set initial data
+  // Debug check
+  useEffect(() => {
+    console.log("App mounted. Games count:", games?.length);
+    if (!games || games.length === 0) {
+      console.warn("No games data found or loaded.");
+    }
+  }, [games]);
   return (
     <div className="min-h-screen font-sans bg-frog-dark">
       {/* Navigation */}
