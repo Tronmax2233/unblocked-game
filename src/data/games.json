@@ -14,13 +14,6 @@
     "description": "Smash through floating platforms and reach the bottom in this fast-paced arcade game."
   },
   {
-    "id": "snaker-io",
-    "name": "Snaker.io",
-    "url": "https://cloud.onlinegames.io/games/2026/more/snaker-io/game.html",
-    "thumbnail": "https://www.onlinegames.io/media/posts/1261/responsive/snaker-io-lg.webp",
-    "description": "The ultimate io snake challenge. Grow your snake and dominate the arena."
-  },
-  {
     "id": "geometry-dash-freenova",
     "name": "Geometry Dash Freezenova",
     "url": "https://www.onlinegames.io/games/2023/q2/geometry-dash-freezenova/index.html",
@@ -161,13 +154,6 @@
     "description": "Cook and serve fast food as quickly as possible to hungry customers."
   },
   {
-    "id": "basketball-io",
-    "name": "Basketball.io",
-    "url": "https://www.onlinegames.io/games/2022/unity3/basketball-io/index.html",
-    "thumbnail": "https://www.onlinegames.io/media/posts/302/responsive/Basketball-io-2-lg.jpg",
-    "description": "Clash with other players in a fast-paced basketball multiplayer arena."
-  },
-  {
     "id": "geometry-vector",
     "name": "Geometry Vector",
     "url": "https://cloud.onlinegames.io/games/2026/construct/329/geometry-vector/game.html",
@@ -266,13 +252,6 @@
     "description": "Gladiator combat with a unique hopping mechanic. Fight for glory!"
   },
   {
-    "id": "toonz-io",
-    "name": "ToonZ io",
-    "url": "https://www.onlinegames.io/games/2021/unity3/toonz-io/index.html",
-    "thumbnail": "https://www.onlinegames.io/media/posts/230/responsive/Toonz-io-Game-lg.jpg",
-    "description": "Engage in toon-styled multiplayer battles in this action-packed io game."
-  },
-  {
     "id": "crown-defense",
     "name": "Crown Defense",
     "url": "https://cloud.onlinegames.io/games/2025/construct/337/crown-defense/index-og.html",
@@ -357,62 +336,6 @@
     "description": "Help Finn climb to new heights in this challenging and vertical adventure."
   },
   {
-    "id": "polytrack",
-    "name": "Polytrack",
-    "url": "https://www.kodub.com/apps/polytrack",
-    "thumbnail": "https://cdn.webgamer.io/games/polytrack/polytrack.480x.50pc.avif",
-    "description": "Speed through low-poly tracks in this minimalist racing experience."
-  },
-  {
-    "id": "killover",
-    "name": "Killover",
-    "url": "https://games.webgamer.io/killover/",
-    "thumbnail": "https://cdn.webgamer.io/games/killover/killover.480x.50pc.avif",
-    "description": "Intense action survival in a hostile environment."
-  },
-  {
-    "id": "chrome-shift-genesis",
-    "name": "Chrome Shift Genesis",
-    "url": "https://worlds.viverse.com/BdxcUtJ",
-    "thumbnail": "https://cdn.webgamer.io/games/chrome-shift-genesis/chrome-shift-genesis.480x.50pc.avif",
-    "description": "Explore futuristic worlds in this high-tech adventure."
-  },
-  {
-    "id": "ovivo",
-    "name": "Ovivo",
-    "url": "https://worlds.viverse.com/iv9gsHj",
-    "thumbnail": "https://cdn.webgamer.io/games/ovivo/ovivo.480x.50pc.avif",
-    "description": "A beautiful black and white platformer with unique gravity mechanics."
-  },
-  {
-    "id": "sentiel",
-    "name": "Sentiel",
-    "url": "https://worlds.viverse.com/Y6sht8h",
-    "thumbnail": "https://cdn.webgamer.io/games/sentiel/sentiel.480x.50pc.avif",
-    "description": "Defend your territory in this futuristic combat game."
-  },
-  {
-    "id": "bubbits",
-    "name": "Bubbits",
-    "url": "https://bubbits.io/",
-    "thumbnail": "https://cdn.webgamer.io/games/bubbits/bubbits.480x.50pc.avif",
-    "description": "Catch and pop bubbles in this addictive arcade game."
-  },
-  {
-    "id": "army-clash-io",
-    "name": "Army Clash IO",
-    "url": "https://armyclash.io/",
-    "thumbnail": "https://cdn.webgamer.io/games/army-clash-io/army-clash-io.480x.50pc.avif",
-    "description": "Build your army and clash with players in real-time strategy."
-  },
-  {
-    "id": "conq-io",
-    "name": "Conq IO",
-    "url": "https://www.conq.io/",
-    "thumbnail": "https://cdn.webgamer.io/games/conq-io/conq-io.480x.50pc.avif",
-    "description": "Conquer territories and expand your empire in this IO game."
-  },
-  {
     "id": "dungeon-survivors",
     "name": "Dungeon Survivors",
     "url": "https://dungeon-survivors.netlify.app/",
@@ -422,7 +345,7 @@
   {
     "id": "2048",
     "name": "2048",
-    "url": "https://play2048.co/",
+    "url": "https://hg-2048.netlify.app/",
     "thumbnail": "https://cdn.webgamer.io/games/2048/2048.480x.50pc.avif",
     "description": "The addictive tile-sliding puzzle game."
   },
@@ -432,13 +355,6 @@
     "url": "https://dungeons-n-ducks.vercel.app/",
     "thumbnail": "https://cdn.webgamer.io/games/dungeons-n-ducks/dungeons-n-ducks.480x.50pc.avif",
     "description": "Quirky dungeon crawling with feathered heroes."
-  },
-  {
-    "id": "slow-roads",
-    "name": "Slow Roads",
-    "url": "https://slowroads.io/",
-    "thumbnail": "https://cdn.webgamer.io/games/slow-roads/slow-roads.480x.50pc.avif",
-    "description": "Relax and drive forever through procedurally generated scenery."
   },
   {
     "id": "summer-afternoon",

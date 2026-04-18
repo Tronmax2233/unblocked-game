@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Gamepad2, X, Ghost, Play, ShieldAlert, Maximize, Search } from "lucide-react";
+import { Gamepad2, X, Ghost, Play, ShieldAlert, Maximize, Search, ExternalLink } from "lucide-react";
 import { AdSense } from "./components/AdSense";
 import initialGamesData from "./data/games.json";
 
@@ -94,9 +94,9 @@ function PanicModeDisguise({ onExit }: { onExit: () => void }) {
       
       <button 
         onClick={onExit}
-        className="fixed bottom-2 right-2 text-[6px] transition-colors text-black/5 hover:text-black/50"
+        className="fixed bottom-2 right-2 w-4 h-4 text-black/5 hover:text-black/50"
       >
-        exit_disguise
+        .
       </button>
     </div>
   );
@@ -225,7 +225,7 @@ export default function App() {
             </div>
             <div className="h-6 w-[1px] bg-border mx-2 hidden sm:block"></div>
             <div className="text-[10px] text-frog-light font-bold uppercase tracking-[0.2em] opacity-30">
-              v3.0 Secured Pond
+              Secured Pond
             </div>
           </div>
         </div>
@@ -322,35 +322,6 @@ export default function App() {
           <div className="w-full max-w-4xl">
             <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" />
           </div>
-
-          {/* SEO Content Section */}
-          <div className="mt-16 w-full max-w-4xl text-left prose prose-invert prose-frog">
-            <h2 className="text-3xl font-display font-black text-frog-main mb-6 uppercase tracking-tight">
-              About Unblocked Games 76 - The Unblocked Frog Pond
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-frog-light/80 leading-relaxed text-sm">
-              <div className="space-y-4">
-                <p>
-                  Welcome to <strong className="text-frog-main">Unblocked Frog</strong>, your ultimate destination for curated <strong className="text-white">Unblocked Games 76</strong>. Our mission is simple: to provide a safe, secure, and ribbiting environment for students and gamers to enjoy their favorite web games without restrictions.
-                </p>
-                <p>
-                  We understand the importance of a reliable "gaming pond." That's why every game in our collection is hand-picked for quality, performance, and fun. Whether you're looking for fast-paced racing, tactical strategy, or relaxing puzzles, the Unblocked Frog has you covered.
-                </p>
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-lg font-bold text-white uppercase italic">Why choose our Unblocked Games?</h3>
-                <ul className="list-disc pl-5 space-y-2 text-frog-light/60">
-                  <li><span className="text-frog-main font-bold">Fast & Secure:</span> Lightweight site architecture ensures quick loading on any network.</li>
-                  <li><span className="text-frog-main font-bold">Varied Collection:</span> From <em className="text-white">Polytrack</em> and <em className="text-white">2048</em> to <em className="text-white">Slow Roads</em>.</li>
-                  <li><span className="text-frog-main font-bold">Panic Mode:</span> One-click disguise for those unexpected "predators" in the classroom.</li>
-                  <li><span className="text-frog-main font-bold">Fullscreen Support:</span> Immerse yourself completely in the gaming experience.</li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-8 border-t border-white/5 pt-8 text-xs text-frog-light/40 italic text-center">
-              Our curated pond is updated regularly. Bookmark Unblocked Frog for the best Unblocked Games 76 experience online.
-            </div>
-          </div>
         </div>
       </main>
 
@@ -390,6 +361,15 @@ export default function App() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
+                <button 
+                  onClick={() => window.open(selectedGame.url, '_blank')}
+                  className="p-2 hover:bg-white/10 rounded-full transition-colors group flex items-center gap-2"
+                  aria-label="Open in new window"
+                >
+                  <ExternalLink className="w-5 h-5 text-frog-light group-hover:text-frog-main transition-colors" />
+                  <span className="text-[10px] font-bold text-frog-light uppercase hidden sm:block">Open New Tab</span>
+                </button>
+                <div className="h-6 w-[1px] bg-white/10 mx-1"></div>
                 <button 
                   onClick={toggleFullscreen}
                   className="p-2 hover:bg-white/10 rounded-full transition-colors group flex items-center gap-2"
@@ -493,6 +473,13 @@ export default function App() {
                   allow="autoplay; payment; fullscreen; microphone; focus-without-user-activation; screen-wake-lock; gamepad; clipboard-read; clipboard-write;"
                   allowFullScreen
                 />
+                
+                {/* Connection Hint */}
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 bg-black/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/5 pointer-events-none">
+                  <p className="text-[10px] text-frog-light font-medium uppercase tracking-wider">
+                    Game not loading? Click <span className="text-frog-main font-bold">"Open New Tab"</span> above!
+                  </p>
+                </div>
               </div>
 
               {/* Right Skyscraper Ad */}
