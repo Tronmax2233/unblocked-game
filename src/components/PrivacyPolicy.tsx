@@ -1,72 +1,106 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { ShieldCheck, Lock, Eye, Cookie, Info, ArrowLeft } from 'lucide-react';
 
 interface PrivacyPolicyProps {
   onClose: () => void;
 }
 
-export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
+export function PrivacyPolicy({ onClose }: PrivacyPolicyProps) {
   return (
-    <div className="fixed inset-0 z-[100] bg-frog-dark/95 backdrop-blur-md overflow-y-auto pt-20 pb-10 px-6">
-      <div className="max-w-3xl mx-auto bg-surface border border-border/50 rounded-2xl p-8 relative">
-        <button 
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-white/5 rounded-full transition-colors text-frog-light"
-        >
-          <X className="w-6 h-6" />
-        </button>
-
-        <article className="prose prose-invert prose-frog max-w-none">
-          <h1 className="text-3xl font-display font-black text-frog-main uppercase italic mb-8">Privacy Policy</h1>
-          
-          <p className="text-frog-light/80">Last Updated: April 2026</p>
-          
-          <section className="mt-8 space-y-4">
-            <h2 className="text-xl font-bold text-white">1. Introduction</h2>
-            <p className="text-frog-light/70 text-sm leading-relaxed">
-              Welcome to Unblocked Frog. Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you visit our website.
-            </p>
-
-            <h2 className="text-xl font-bold text-white">2. Information We Collect</h2>
-            <p className="text-frog-light/70 text-sm leading-relaxed">
-              We do not require users to create accounts. However, we may collect non-personal information such as browser type, device information, and usage statistics to improve our services.
-            </p>
-
-            <h2 className="text-xl font-bold text-white">3. Google AdSense and Cookies</h2>
-            <p className="text-frog-light/70 text-sm leading-relaxed font-medium">
-              We use Google AdSense to serve advertisements. Google uses cookies to serve ads based on a user's prior visits to our website or other websites.
-            </p>
-            <ul className="list-disc pl-5 text-frog-light/70 text-sm space-y-2">
-              <li>Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to your sites and/or other sites on the Internet.</li>
-              <li>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noreferrer" className="text-frog-main hover:underline">Google Ad Settings</a>.</li>
-            </ul>
-
-            <h2 className="text-xl font-bold text-white">4. Third-Party Games</h2>
-            <p className="text-frog-light/70 text-sm leading-relaxed">
-              Our website hosts games from third-party providers. These providers may collect data according to their own privacy policies. We encourage you to review those policies as well.
-            </p>
-
-            <h2 className="text-xl font-bold text-white">5. Children's Privacy</h2>
-            <p className="text-frog-light/70 text-sm leading-relaxed">
-              Unblocked Frog does not knowingly collect any personal identifiable information from children under the age of 13. If a parent or guardian believes that we have such information, please contact us immediately.
-            </p>
-
-            <h2 className="text-xl font-bold text-white">6. Consent</h2>
-            <p className="text-frog-light/70 text-sm leading-relaxed">
-              By using our website, you hereby consent to our Privacy Policy and agree to its terms.
-            </p>
-          </section>
-        </article>
-
-        <div className="mt-12 flex justify-center">
+    <div className="fixed inset-0 z-[100] bg-frog-dark overflow-y-auto font-sans text-frog-light selection:bg-frog-main selection:text-black">
+      {/* Header */}
+      <header className="sticky top-0 z-10 bg-frog-dark/80 backdrop-blur-md border-b border-white/5 px-6 py-4">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+             <div className="w-8 h-8 bg-frog-main rounded-lg flex items-center justify-center text-black font-black">P</div>
+             <h1 className="text-xl font-display font-black uppercase tracking-tight text-frog-main">Privacy Policy</h1>
+          </div>
           <button 
             onClick={onClose}
-            className="bg-frog-main text-black px-8 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
+            className="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl transition-all border border-white/5 text-xs font-bold uppercase tracking-widest"
           >
-            I Understand
+            <ArrowLeft className="w-4 h-4" /> Back to Pond
           </button>
         </div>
-      </div>
+      </header>
+
+      {/* Content */}
+      <main className="max-w-4xl mx-auto px-6 py-12 space-y-12">
+        <section className="space-y-4">
+          <div className="flex items-center gap-3 text-frog-main">
+            <Info className="w-6 h-6" />
+            <h2 className="text-2xl font-display font-bold uppercase tracking-wide">Introduction</h2>
+          </div>
+          <p className="leading-relaxed opacity-80">
+            Welcome to <strong>Unblocked Frog</strong>. Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you visit our website <strong>unblocked-frog.github.io</strong>. By using our site, you agree to the terms outlined here.
+          </p>
+          <p className="text-sm opacity-60 italic">Last Updated: April 19, 2026</p>
+        </section>
+
+        <section className="space-y-6">
+          <div className="flex items-center gap-3 text-frog-main">
+            <Lock className="w-6 h-6" />
+            <h2 className="text-2xl font-display font-bold uppercase tracking-wide">Information We Collect</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white/5 border border-white/5 p-6 rounded-2xl">
+              <h3 className="text-lg font-bold mb-3 flex items-center gap-2"><Eye className="w-4 h-4 text-frog-main" /> Automatic Data</h3>
+              <p className="text-sm opacity-70 leading-relaxed">
+                Like most websites, we collect basic technical data such as your IP address, browser type, and duration of visit to improve your gaming experience.
+              </p>
+            </div>
+            <div className="bg-white/5 border border-white/5 p-6 rounded-2xl">
+              <h3 className="text-lg font-bold mb-3 flex items-center gap-2"><Cookie className="w-4 h-4 text-frog-main" /> Cookies</h3>
+              <p className="text-sm opacity-70 leading-relaxed">
+                We use cookies to save your preferences and game progress localy. We do not store sensitive personal information in these cookies.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <div className="flex items-center gap-3 text-frog-main">
+            <ShieldCheck className="w-6 h-6" />
+            <h2 className="text-2xl font-display font-bold uppercase tracking-wide">Google AdSense & DoubleClick</h2>
+          </div>
+          <p className="leading-relaxed opacity-80">
+            As a third-party vendor, Google uses cookies to serve ads on our site. Google's use of the advertising cookie enables it and its partners to serve ads to our users based on their visit to our sites and/or other sites on the Internet.
+          </p>
+          <ul className="list-disc list-inside space-y-2 opacity-70 text-sm ml-4">
+              <li>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" className="text-frog-main underline">Ads Settings</a>.</li>
+              <li>You can also opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="http://www.aboutads.info/choices/" className="text-frog-main underline">www.aboutads.info</a>.</li>
+          </ul>
+        </section>
+
+        <section className="space-y-4">
+          <div className="flex items-center gap-3 text-frog-main">
+            <Cookie className="w-6 h-6" />
+            <h2 className="text-2xl font-display font-bold uppercase tracking-wide">GDPR & EEA Compliance</h2>
+          </div>
+          <p className="leading-relaxed opacity-80">
+            If you are browsing from the European Economic Area (EEA), we comply with GDPR requirements. We use a Google-certified Consent Management Platform to ask for your consent before serving personalized advertisements. You have the right to withdraw your consent at any time via the "Privacy Settings" link in our footer.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-display font-bold uppercase tracking-wide text-frog-main">Third-Party Links</h2>
+          <p className="leading-relaxed opacity-80">
+            Our site contains games from various developers. These third-party sites have their own privacy policies. We are not responsible for the content or activities of these linked sites.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-display font-bold uppercase tracking-wide text-frog-main">Contact Us</h2>
+          <p className="leading-relaxed opacity-80 text-sm">
+            If you have questions regarding this Privacy Policy, please reach out to us via our GitHub repository or the contact information provided on the main page.
+          </p>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-black/20 py-8 px-6 text-center border-t border-white/5">
+        <p className="text-[10px] text-frog-light/30 uppercase font-black tracking-[0.5em]">Unblocked Frog • Privacy First</p>
+      </footer>
     </div>
   );
-};
+}

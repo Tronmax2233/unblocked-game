@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Gamepad2, X, Ghost, Play, ShieldAlert, Maximize, Search, ExternalLink, VolumeX, Volume2 } from "lucide-react";
 import { AdSense } from "./components/AdSense";
 import { PrivacyPolicy } from "./components/PrivacyPolicy";
+import { Contact } from "./components/Contact";
 import initialGamesData from "./data/games.json";
 
 interface Game {
@@ -147,6 +148,7 @@ export default function App() {
   const [showInterstitial, setShowInterstitial] = useState(false);
   const [isPanicActive, setIsPanicActive] = useState(false);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [showContact, setShowContact] = useState(false);
   const [isGameLoading, setIsGameLoading] = useState(false);
   const [loadingTime, setLoadingTime] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -257,8 +259,23 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100]"
           >
             <PrivacyPolicy onClose={() => setShowPrivacyPolicy(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Contact Overlay */}
+      <AnimatePresence>
+        {showContact && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100]"
+          >
+            <Contact onClose={() => setShowContact(false)} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -439,17 +456,24 @@ export default function App() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-frog-light">
           <div className="flex items-center gap-2">
             <span className="text-xl">🐸</span>
-            <span>© 2026 Unblocked Frog Curated.</span>
+            <span>© 2026 Unblocked Frog Curated. All rights reserved.</span>
           </div>
           <div className="flex gap-6">
             <button 
-              onClick={() => setShowPrivacyPolicy(true)}
-              className="text-[10px] uppercase font-bold text-frog-light/40 hover:text-frog-main transition-colors tracking-widest"
+              onClick={() => {
+                setShowPrivacyPolicy(true);
+                window.scrollTo(0, 0);
+              }}
+              className="text-[10px] uppercase font-bold text-frog-light/60 hover:text-frog-main transition-colors tracking-widest"
             >
               Privacy Policy
             </button>
-            <FooterLink label="Terms of Service" />
-            <FooterLink label="Contact Pond" />
+            <button 
+              onClick={() => setShowContact(true)}
+              className="text-[10px] uppercase font-bold text-frog-light/60 hover:text-frog-main transition-colors tracking-widest"
+            >
+              Contact Pond
+            </button>
           </div>
         </div>
       </footer>
