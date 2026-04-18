@@ -16,6 +16,7 @@ interface Game {
   url: string;
   thumbnail: string;
   description: string;
+  category?: string;
 }
 
 // Variations for Panic Mode Disguise
@@ -149,6 +150,7 @@ export default function App() {
   const [isGameLoading, setIsGameLoading] = useState(false);
   const [loadingTime, setLoadingTime] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [isTabHidden, setIsTabHidden] = useState(false);
   const [showMuteNotif, setShowMuteNotif] = useState(false);
   const gameContainerRef = useRef<HTMLDivElement>(null);
@@ -226,14 +228,18 @@ export default function App() {
     return () => clearInterval(interval);
   }, [isGameLoading]);
 
+  const categories = ["All", "Action", "Arcade", "Racing", "Puzzle", "Sports", "Strategy", "Adventure", "Simulator"];
+
   const filteredGames = useMemo(() => {
-    if (!searchQuery.trim()) return games;
     const query = searchQuery.toLowerCase().trim();
-    return games.filter(game => 
-      game.name.toLowerCase().includes(query) || 
-      game.description?.toLowerCase().includes(query)
-    );
-  }, [games, searchQuery]);
+    return games.filter(game => {
+      const matchesSearch = !query || 
+        game.name.toLowerCase().includes(query) || 
+        game.description?.toLowerCase().includes(query);
+      const matchesCategory = selectedCategory === "All" || game.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [games, searchQuery, selectedCategory]);
   
   // Debug check
   useEffect(() => {
@@ -315,21 +321,35 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 md:gap-6">
-            <div className="hidden md:flex flex-col items-end leading-tight shrink-0 px-4">
+          <div className="flex items-center">
+            <div className="hidden md:flex flex-col items-end leading-tight shrink-0 pl-4 pr-0">
               <span className="text-sm font-black text-frog-main uppercase tracking-tight">Panic Mode</span>
               <span className="text-[11px] text-frog-light/90 uppercase font-bold mt-1 flex items-center gap-1.5">
                 Press <span className="bg-frog-main text-black px-2 py-0.5 rounded font-mono text-xs shadow-sm ring-2 ring-frog-main/20">`</span> key to hide
               </span>
             </div>
-
-            <div className="h-6 w-[1px] bg-border mx-1 hidden sm:block"></div>
-            <div className="text-[10px] text-frog-light font-bold uppercase tracking-[0.2em] opacity-30 hidden sm:block">
-              Secured Pond
-            </div>
           </div>
         </div>
       </nav>
+
+      {/* Category Navigation */}
+      <div className="sticky top-[77px] z-30 bg-frog-dark/80 backdrop-blur-md border-b border-white/5 px-6 py-3">
+        <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all shrink-0 border ${
+                selectedCategory === cat
+                ? 'bg-frog-main text-black border-frog-main shadow-[0_0_15px_rgba(163,230,53,0.3)]'
+                : 'bg-white/5 text-frog-light border-white/5 hover:border-white/20'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Hero Section */}
       <header className="px-6 py-12 md:py-20 overflow-hidden">
@@ -367,7 +387,6 @@ export default function App() {
               {searchQuery ? `Searching: ${searchQuery}` : 'Recommended'}
             </h3>
           </div>
-          <p className="text-sm text-frog-light">{filteredGames.length} games found</p>
         </div>
 
         {filteredGames.length > 0 ? (
@@ -646,6 +665,12 @@ function GameCard({ game, index, onClick }: GameCardProps) {
           }}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
+
+        {game.category && (
+          <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md border border-white/10 px-2 py-0.5 rounded text-[9px] font-black text-frog-main uppercase tracking-widest z-10">
+            {game.category}
+          </div>
+        )}
         
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
            <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 flex items-center gap-2 bg-frog-main text-black px-3 py-1 rounded-full text-[10px] font-bold font-display w-fit">
