@@ -250,7 +250,7 @@ export default function App() {
                     className="w-full bg-black/40 border border-white/5 rounded-xl py-3 pl-10 pr-4 text-sm text-frog-light placeholder:text-frog-light/20 focus:outline-none focus:border-frog-main/50 transition-all shadow-inner"
                   />
                 </div>
-                <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '100%', minHeight: '90px' }} />
+                <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" style={{ width: '100%', minHeight: '90px' }} />
              </div>
           </motion.div>
 
@@ -293,7 +293,7 @@ export default function App() {
                 {(index + 1) % 4 === 0 && index !== filteredGames.length - 1 && !searchQuery && (
                   <div className={`flex items-center justify-center bento-card bg-surface/30 p-4 overflow-hidden h-[150px] ${(index + 1) % 8 === 0 ? 'col-span-full' : 'sm:col-span-2'}`}>
                      <div className="w-full h-full flex items-center justify-center">
-                        <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '100%', height: '100%' }} />
+                        <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" style={{ width: '100%', height: '100%' }} />
                      </div>
                   </div>
                 )}
@@ -320,7 +320,36 @@ export default function App() {
 
         <div className="mt-20 pt-10 border-t border-border/30 flex flex-col items-center w-full overflow-hidden">
           <div className="w-full max-w-4xl">
-            <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" />
+            <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" />
+          </div>
+
+          {/* SEO Content Section */}
+          <div className="mt-16 w-full max-w-4xl text-left prose prose-invert prose-frog">
+            <h2 className="text-3xl font-display font-black text-frog-main mb-6 uppercase tracking-tight">
+              About Unblocked Games 76 - The Unblocked Frog Pond
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-frog-light/80 leading-relaxed text-sm">
+              <div className="space-y-4">
+                <p>
+                  Welcome to <strong className="text-frog-main">Unblocked Frog</strong>, your ultimate destination for curated <strong className="text-white">Unblocked Games 76</strong>. Our mission is simple: to provide a safe, secure, and ribbiting environment for students and gamers to enjoy their favorite web games without restrictions.
+                </p>
+                <p>
+                  We understand the importance of a reliable "gaming pond." That's why every game in our collection is hand-picked for quality, performance, and fun. Whether you're looking for fast-paced racing, tactical strategy, or relaxing puzzles, the Unblocked Frog has you covered.
+                </p>
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold text-white uppercase italic">Why choose our Unblocked Games?</h3>
+                <ul className="list-disc pl-5 space-y-2 text-frog-light/60">
+                  <li><span className="text-frog-main font-bold">Fast & Secure:</span> Lightweight site architecture ensures quick loading on any network.</li>
+                  <li><span className="text-frog-main font-bold">Varied Collection:</span> From <em className="text-white">Polytrack</em> and <em className="text-white">2048</em> to <em className="text-white">Slow Roads</em>.</li>
+                  <li><span className="text-frog-main font-bold">Panic Mode:</span> One-click disguise for those unexpected "predators" in the classroom.</li>
+                  <li><span className="text-frog-main font-bold">Fullscreen Support:</span> Immerse yourself completely in the gaming experience.</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-8 border-t border-white/5 pt-8 text-xs text-frog-light/40 italic text-center">
+              Our curated pond is updated regularly. Bookmark Unblocked Frog for the best Unblocked Games 76 experience online.
+            </div>
           </div>
         </div>
       </main>
@@ -385,7 +414,7 @@ export default function App() {
               <div className="hidden lg:flex w-[160px] shrink-0 bg-surface/10 border-r border-white/5 flex-col items-center py-4">
                 <p className="text-[9px] text-white/20 uppercase font-black mb-4 vertical-text">Advertisement</p>
                 <div className="w-[120px]">
-                  <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '120px', height: '600px', display: 'block' }} />
+                  <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" style={{ width: '120px', height: '600px', display: 'block' }} />
                 </div>
               </div>
 
@@ -396,7 +425,7 @@ export default function App() {
                        <h5 className="text-2xl font-display font-bold text-frog-main uppercase italic">Ribbiting Content Loading...</h5>
                        <div className="bg-frog-dark border border-white/5 rounded-2xl p-4 min-h-[300px] flex flex-col items-center justify-center">
                           <p className="text-[9px] text-white/20 uppercase font-black mb-4 tracking-tighter">Advertisement</p>
-                          <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '100%', minHeight: '250px' }} />
+                          <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" style={{ width: '100%', minHeight: '250px' }} />
                        </div>
                        <motion.button
                         whileHover={{ scale: 1.05 }}
@@ -470,14 +499,14 @@ export default function App() {
               <div className="hidden lg:flex w-[160px] shrink-0 bg-surface/10 border-l border-white/5 flex-col items-center py-4">
                 <p className="text-[9px] text-white/20 uppercase font-black mb-4 vertical-text">Advertisement</p>
                 <div className="w-[120px]">
-                  <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '120px', height: '600px', display: 'block' }} />
+                  <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" style={{ width: '120px', height: '600px', display: 'block' }} />
                 </div>
               </div>
 
               {/* Mobile Bottom Banner */}
               <div className="lg:hidden h-[90px] border-t border-white/5 bg-surface/10 p-2 overflow-hidden flex items-center justify-center">
                 <div className="w-full max-w-[728px]">
-                  <AdSense adClient="ca-pub-XXXXXXXXXXXXXXXX" adSlot="XXXXXXXXXX" style={{ width: '100%', height: '100%' }} />
+                  <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" style={{ width: '100%', height: '100%' }} />
                 </div>
               </div>
             </div>
