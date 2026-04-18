@@ -5,8 +5,9 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Gamepad2, X, Ghost, Play, ShieldAlert, Maximize, Search, ExternalLink } from "lucide-react";
+import { Gamepad2, X, Ghost, Play, ShieldAlert, Maximize, Search, ExternalLink, VolumeX, Volume2 } from "lucide-react";
 import { AdSense } from "./components/AdSense";
+import { PrivacyPolicy } from "./components/PrivacyPolicy";
 import initialGamesData from "./data/games.json";
 
 interface Game {
@@ -18,11 +19,46 @@ interface Game {
 }
 
 // Variations for Panic Mode Disguise
+const WIKIPEDIA_ARTICLES = [
+  {
+    title: "Institutional Resource Portal",
+    subtitle: "Analysis of Advanced Pedagogy",
+    content: "The integration of computational logic in secondary education environments provides a framework for students to engage with complex problem-solving metrics. Research indicates that structured pedagogical entry points significantly enhance long-term retention of algorithmic concepts.",
+    sidebar: ["Curriculum Overview", "Faculty Research", "Student Resources", "Academic Calendar"]
+  },
+  {
+    title: "Global Economic Assessment",
+    subtitle: "Macroeconomic Trends in Developing Markets",
+    content: "Analysis of trade volatility in Southeast Asian markets during the 2024 fiscal cycle suggests a robust trend toward decentralized manufacturing hubs. Fiscal policies implemented by centralized banking institutions have shown a 2.4% correlation with increased domestic asset valuations.",
+    sidebar: ["Market Analytics", "Fiscal Policy Reports", "Trade Agreements", "GDP Forecasts"]
+  },
+  {
+    title: "Marine Biological Review",
+    subtitle: "Benthic Ecosystems in the Abyssal Zone",
+    content: "The abyssal zone, comprising over 80% of the ocean's total volume, remains one of the least understood biomes on Earth. Recent submersible data indicates a surprisingly high density of chemosynthetic organisms clustering around thermal vents at depths exceeding 4,000 meters.",
+    sidebar: ["Species Database", "Thermocline Data", "Oceanic Mapping", "Conservation Efforts"]
+  },
+  {
+    title: "Theoretical Physics Journal",
+    subtitle: "Entropy and the Arrow of Time",
+    content: "Thermodynamic irreversibility is a fundamental constraint on the progression of physical states within a closed system. The second law of thermodynamics dictates that entropy must increase over time, providing a cosmological basis for the temporal directionality observed in classical mechanics.",
+    sidebar: ["Quantum Foundations", "Relativity Updates", "Field Equations", "Conference Notes"]
+  },
+  {
+    title: "Digital History Archive",
+    subtitle: "Origins of the Printing Press (1440-1500)",
+    content: "Johannes Gutenberg's introduction of movable type in Europe facilitated a paradigm shift in the dissemination of information. The resulting surge in literacy rates during the late 15th century contributed directly to the sociocultural transformations known as the Renaissance.",
+    sidebar: ["Manuscript Studies", "Technological Impact", "Gutenberg Bible", "Typographic Evolution"]
+  }
+];
+
 function PanicModeWikipedia() {
+  const article = useMemo(() => WIKIPEDIA_ARTICLES[Math.floor(Math.random() * WIKIPEDIA_ARTICLES.length)], []);
+
   return (
     <div className="max-w-4xl mx-auto px-8 py-12">
       <header className="border-b-2 border-slate-200 pb-4 mb-8">
-        <h1 className="text-4xl font-serif">Institutional Resource Portal</h1>
+        <h1 className="text-4xl font-serif">{article.title}</h1>
         <p className="text-sm text-slate-500 mt-2 italic flex items-center gap-2">
           <ShieldAlert className="w-3 h-3" /> Educational Access Validated • April 2026
         </p>
@@ -30,12 +66,13 @@ function PanicModeWikipedia() {
       <div className="flex gap-8">
         <aside className="hidden md:block w-48 shrink-0 space-y-4 text-sm text-[#0645ad] border-r border-slate-100 pr-6">
           <p className="font-bold text-black border-b border-slate-100 pb-1 uppercase text-[10px] tracking-wider">Site Navigation</p>
-          <p className="hover:underline cursor-pointer">Curriculum Overview</p>
-          <p className="hover:underline cursor-pointer">Faculty Research</p>
+          {article.sidebar.map((item, i) => (
+            <p key={i} className="hover:underline cursor-pointer">{item}</p>
+          ))}
         </aside>
         <main className="flex-1 space-y-6">
-          <h2 className="text-2xl font-bold border-b border-slate-200 pb-2">Analysis of Advanced Pedagogy</h2>
-          <p className="leading-relaxed"> computational logic in secondary education environments provides a framework for students to engage with complex problem-solving metrics.</p>
+          <h2 className="text-2xl font-bold border-b border-slate-200 pb-2">{article.subtitle}</h2>
+          <p className="leading-relaxed text-slate-700">{article.content}</p>
         </main>
       </div>
     </div>
@@ -108,9 +145,29 @@ export default function App() {
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [showInterstitial, setShowInterstitial] = useState(false);
   const [isPanicActive, setIsPanicActive] = useState(false);
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [isGameLoading, setIsGameLoading] = useState(false);
+  const [loadingTime, setLoadingTime] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isTabHidden, setIsTabHidden] = useState(false);
+  const [showMuteNotif, setShowMuteNotif] = useState(false);
   const gameContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-Mute on Tab Switch
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setIsTabHidden(true);
+      } else {
+        setIsTabHidden(false);
+        setShowMuteNotif(true);
+        const timer = setTimeout(() => setShowMuteNotif(false), 2000);
+        return () => clearTimeout(timer);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
 
   // Randomize games on mount
   useEffect(() => {
@@ -132,11 +189,11 @@ export default function App() {
     setIsGameLoading(true);
   };
 
-  // Panic Mode Shortcut (Alt + P / Cmd + P)
+  // Panic Mode Shortcut (Backtick Key)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Support Alt (Option on Mac) + P OR Command (Mac) + P
-      if ((e.altKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+      // Use backtick (`) as a safe, non-conflicting panic key
+      if (e.key === '`') {
         e.preventDefault();
         setIsPanicActive(prev => !prev);
       }
@@ -157,6 +214,18 @@ export default function App() {
     }
   };
 
+  // Track loading time for heavy games
+  useEffect(() => {
+    let interval: number;
+    if (isGameLoading) {
+      setLoadingTime(0);
+      interval = window.setInterval(() => {
+        setLoadingTime(prev => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isGameLoading]);
+
   const filteredGames = useMemo(() => {
     if (!searchQuery.trim()) return games;
     const query = searchQuery.toLowerCase().trim();
@@ -175,6 +244,19 @@ export default function App() {
   }, [games]);
   return (
     <div className="min-h-screen font-sans bg-frog-dark">
+      {/* Privacy Policy Overlay */}
+      <AnimatePresence>
+        {showPrivacyPolicy && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <PrivacyPolicy onClose={() => setShowPrivacyPolicy(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Panic Mode Overlay */}
       <AnimatePresence>
         {isPanicActive && (
@@ -190,41 +272,59 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      {/* Auto-Mute Notification */}
+      <AnimatePresence>
+        {showMuteNotif && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, x: '-50%' }}
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[60] bg-frog-main text-black px-6 py-3 rounded-full font-black text-sm uppercase flex items-center gap-3 shadow-2xl ring-4 ring-black/20"
+          >
+            <Volume2 className="w-5 h-5" />
+            <span>Audio Unmuted • Welcome Back!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Navigation - Sticky Logo Only */}
       <nav className="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border px-6 py-5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div 
-            className="flex items-center gap-3 cursor-pointer group"
-            onClick={() => setSelectedGame(null)}
-          >
-            <div className="w-9 h-9 bg-frog-main rounded-xl flex items-center justify-center text-black font-black text-xl group-hover:rotate-12 transition-transform">
-              F
+          <div className="flex items-center gap-4 flex-1">
+            <div 
+              className="flex items-center gap-3 cursor-pointer group shrink-0"
+              onClick={() => setSelectedGame(null)}
+            >
+              <div className="w-9 h-9 bg-frog-main rounded-xl flex items-center justify-center text-black font-black text-xl group-hover:rotate-12 transition-transform">
+                F
+              </div>
+              <h1 className="text-xl md:text-2xl font-display font-extrabold tracking-tighter text-frog-main uppercase group-hover:scale-105 transition-transform hidden sm:block">
+                Unblocked <span className="text-[#f1f5f9]">Frog</span>
+              </h1>
             </div>
-            <h1 className="text-2xl font-display font-extrabold tracking-tighter text-frog-main uppercase group-hover:scale-105 transition-transform">
-              Unblocked <span className="text-[#f1f5f9]">Frog</span>
-            </h1>
-          </div>
 
-          <div className="flex-1 max-w-md mx-8 hidden lg:block">
-            <div className="relative group">
+            <div className="max-w-xs md:max-w-md w-full relative group mr-4 md:mr-8 transition-all">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-frog-light/40 group-focus-within:text-frog-main transition-colors" />
               <input 
                 type="text"
                 placeholder="Search games..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-frog-dark/50 border border-white/5 rounded-xl py-2.5 pl-10 pr-4 text-sm text-frog-light placeholder:text-frog-light/20 focus:outline-none focus:border-frog-main/50 focus:ring-1 focus:ring-frog-main/20 transition-all"
+                className="w-full bg-frog-dark/50 border border-white/5 rounded-xl py-2 md:py-2.5 pl-10 pr-4 text-xs md:text-sm text-frog-light placeholder:text-frog-light/20 focus:outline-none focus:border-frog-main/50 focus:ring-1 focus:ring-frog-main/20 transition-all"
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="hidden md:flex flex-col items-end">
-              <span className="text-xl font-black text-frog-main uppercase tracking-tighter animate-pulse">Panic Mode Active</span>
-              <span className="text-sm text-frog-light opacity-90 uppercase font-bold">Press Alt+P or Cmd+P to hide</span>
+          <div className="flex items-center gap-3 md:gap-6">
+            <div className="hidden md:flex flex-col items-end leading-tight shrink-0 px-4">
+              <span className="text-sm font-black text-frog-main uppercase tracking-tight">Panic Mode</span>
+              <span className="text-[11px] text-frog-light/90 uppercase font-bold mt-1 flex items-center gap-1.5">
+                Press <span className="bg-frog-main text-black px-2 py-0.5 rounded font-mono text-xs shadow-sm ring-2 ring-frog-main/20">`</span> key to hide
+              </span>
             </div>
-            <div className="h-6 w-[1px] bg-border mx-2 hidden sm:block"></div>
-            <div className="text-[10px] text-frog-light font-bold uppercase tracking-[0.2em] opacity-30">
+
+            <div className="h-6 w-[1px] bg-border mx-1 hidden sm:block"></div>
+            <div className="text-[10px] text-frog-light font-bold uppercase tracking-[0.2em] opacity-30 hidden sm:block">
               Secured Pond
             </div>
           </div>
@@ -240,16 +340,6 @@ export default function App() {
             className="mb-12 overflow-hidden flex justify-center w-full"
           >
              <div className="w-full max-w-[728px] p-2 bg-surface/20 rounded-xl border border-border/30 px-4">
-                <div className="lg:hidden mb-4 relative group">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-frog-light/40 group-focus-within:text-frog-main transition-colors" />
-                  <input 
-                    type="text"
-                    placeholder="Search games..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-black/40 border border-white/5 rounded-xl py-3 pl-10 pr-4 text-sm text-frog-light placeholder:text-frog-light/20 focus:outline-none focus:border-frog-main/50 transition-all shadow-inner"
-                  />
-                </div>
                 <AdSense adClient="ca-pub-8358881625500999" adSlot="XXXXXXXXXX" style={{ width: '100%', minHeight: '90px' }} />
              </div>
           </motion.div>
@@ -333,7 +423,12 @@ export default function App() {
             <span>© 2026 Unblocked Frog Curated.</span>
           </div>
           <div className="flex gap-6">
-            <FooterLink label="Privacy Policy" />
+            <button 
+              onClick={() => setShowPrivacyPolicy(true)}
+              className="text-[10px] uppercase font-bold text-frog-light/40 hover:text-frog-main transition-colors tracking-widest"
+            >
+              Privacy Policy
+            </button>
             <FooterLink label="Terms of Service" />
             <FooterLink label="Contact Pond" />
           </div>
@@ -460,6 +555,16 @@ export default function App() {
                           />
                         </div>
                         <p className="text-[10px] text-frog-light uppercase font-bold tracking-[0.3em] opacity-40">Loading Game World</p>
+                        
+                        {loadingTime > 5 && (
+                          <motion.p 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="text-[10px] text-frog-main font-bold max-w-[200px] leading-relaxed"
+                          >
+                            TIP: Heavy game detected. Please wait, it will start shortly! 🐸
+                          </motion.p>
+                        )}
                       </div>
                     </motion.div>
                   )}
@@ -471,6 +576,13 @@ export default function App() {
                   className={`w-full h-full border-none transition-opacity duration-500 ${isGameLoading ? 'opacity-0' : 'opacity-100'}`}
                   title={selectedGame.name}
                   allow="autoplay; payment; fullscreen; microphone; focus-without-user-activation; screen-wake-lock; gamepad; clipboard-read; clipboard-write;"
+                  referrerPolicy="no-referrer"
+                  // @ts-ignore - legacy attributes for some game engines
+                  webkitallowfullscreen="true" 
+                  // @ts-ignore
+                  mozallowfullscreen="true" 
+                  // @ts-ignore
+                  msallowfullscreen="true"
                   allowFullScreen
                 />
                 

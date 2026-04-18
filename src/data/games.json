@@ -362,5 +362,159 @@
     "url": "https://summer-afternoon.vlucendo.com/",
     "thumbnail": "https://cdn.webgamer.io/games/summer-afternoon/summer-afternoon.480x.50pc.avif",
     "description": "Experience a peaceful summer afternoon in this artistic exploration."
+  },
+  {
+    "id": "clicker-heroes",
+    "name": "Clicker Heroes",
+    "url": "https://www.clickerheroes.com/play/",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/clicker-heroes-screenshot-KGuEurrO.png",
+    "description": "The legendary idle RPG. Warning: Large game, may take a moment to load!"
+  },
+  {
+    "id": "mr-mine",
+    "name": "Mr.Mine",
+    "url": "https://mrmine.com/play/",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/mr-mine-screenshot-C7428jSK.png",
+    "description": "Deep mine simulator. Large game, waiting is worth the treasure!"
+  },
+  {
+    "id": "poker-quest",
+    "name": "Poker Quest",
+    "url": "https://playsaurus.com/kongPokerQuest63/",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/poker-quest-screenshot-BDFoidpq.png",
+    "description": "Poker Quest is Developed by Playsaurus - an idle game development studio."
+  },
+  {
+    "id": "grindcraft",
+    "name": "Grindcraft",
+    "url": "https://grindcraft.com/game.php",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/grindcraft-screenshot-DoZLcEWg.png",
+    "description": "Grindcraft is Developed by Playsaurus - an idle game development studio."
+  },
+  {
+    "id": "fray-fight",
+    "name": "Fray Fight",
+    "url": "https://frayfight.com/game/",
+    "thumbnail": "https://cdn.playsaurus.com/build/assets/fray-fight-screenshot-Bn13KvoA.png",
+    "description": "Fray Fight is Developed by Playsaurus - an idle game development studio."
+  },
+  {
+    "id": "zuno",
+    "name": "Zuno",
+    "url": "https://zv1y2i8p.play.gamezop.com/g/ByQxJnp7qRB",
+    "thumbnail": "https://business.gamezop.com/img/gamezop/ByQxJnp7qRB/cover.jpg?w=600&q=50",
+    "description": "Escape the freezing traps in this fast-paced arcade challenge."
+  },
+  {
+    "id": "fruity",
+    "name": "Fruity",
+    "url": "https://zv1y2i8p.play.gamezop.com/g/mKZZW9NXW",
+    "thumbnail": "https://business.gamezop.com/img/gamezop/mKZZW9NXW/cover.jpg?w=600&q=50",
+    "description": "Unleash your fury and take revenge in this intense action game."
+  },
+  {
+    "id": "tower-plant",
+    "name": "Tower Plant",
+    "url": "https://zv1y2i8p.play.gamezop.com/g/Umfd7yvMd",
+    "thumbnail": "https://business.gamezop.com/img/gamezop/Umfd7yvMd/cover.jpg?w=600&q=50",
+    "description": "Twist your way to the top of the tower in this addictive puzzle game."
+  },
+  {
+    "id": "shade-hunters",
+    "name": "Shade Hunters",
+    "url": "https://zv1y2i8p.play.gamezop.com/g/9lpHai56Q",
+    "thumbnail": "https://business.gamezop.com/img/gamezop/9lpHai56Q/cover.jpg?w=600&q=50",
+    "description": "Hunt shadows and survive the night in this high-intensity action title."
+  },
+  {
+    "id": "sudoku",
+    "name": "Sudoku",
+    "url": "https://zv1y2i8p.play.gamezop.com/g/SJgx126Qc0H",
+    "thumbnail": "https://business.gamezop.com/img/gamezop/SJgx126Qc0H/cover.jpg?w=300&q=50",
+    "description": "Balance and skill test on the high seas. Can you rock the dock?"
+  },
+  {
+    "id": "luzo",
+    "name": "Luzo",
+    "url": "https://zv1y2i8p.play.gamezop.com/g/SkhljT2fdgb",
+    "thumbnail": "https://business.gamezop.com/img/gamezop/SkhljT2fdgb/cover.jpg?w=300&q=50",
+    "description": "Reflect and match in this challenging visual puzzle game."
+  },
+  {
+    "id": "fire-and-water",
+    "name": "Fire and Water",
+    "url": "https://www.onlinegames.io/games/2023/construct/179/fire-and-water/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/469/responsive/Fire-and-Water-lg.jpg",
+    "description": "Collaborate as Fire and Water to solve elemental puzzles and reach the exit."
+  },
+  {
+    "id": "tank-arena",
+    "name": "Tank Arena",
+    "url": "https://cloud.onlinegames.io/games/2025/construct/293/tank-arena/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/956/responsive/Tank-Arena-Online-lg.jpg",
+    "description": "Engage in explosive tank battles in a variety of challenging arenas."
+  },
+  {
+    "id": "2-player-crazy-racer",
+    "name": "2 Player Crazy Racer",
+    "url": "https://www.onlinegames.io/games/2022/unity3/2-player-crazy-racer/index.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/617/responsive/2-Player-Crazy-Racer-lg.jpg",
+    "description": "Compete with a friend or the AI in this wild and crazy racing game."
+  },
+  {
+    "id": "solitaire",
+    "name": "Solitaire",
+    "url": "https://cloud.onlinegames.io/games/2025/html/solitaire/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1007/responsive/solitaire-lg.jpg",
+    "description": "The classic card game of patience and skill. Can you clear the board?"
+  },
+  {
+    "id": "voxel-world",
+    "name": "Voxel World",
+    "url": "https://cloud.onlinegames.io/games/2025/unity/voxel-world/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/937/responsive/voxel-world-lg.jpg",
+    "description": "Explore and build in a vast, pixelated voxel world."
+  },
+  {
+    "id": "fast-food-manager",
+    "name": "Fast Food Manager",
+    "url": "https://cloud.onlinegames.io/games/2025/unity4/fast-food-manager/index-og.html",
+    "thumbnail": "https://www.onlinegames.io/media/posts/1114/responsive/fast-food-manager-lg.webp",
+    "description": "Manage your own fast food restaurant and satisfy hungry customers."
+  },
+  {
+    "id": "survivor-io",
+    "name": "Survivor.io",
+    "url": "https://www.madkidgames.com/full/survivor-io",
+    "thumbnail": "https://www.madkidgames.com/games/survivor-io/thumb_2.jpg",
+    "description": "Survive waves of zombies in this intense roguelike action game."
+  },
+  {
+    "id": "beat-the-puppet",
+    "name": "Beat The Puppet",
+    "url": "https://www.madkidgames.com/full/beat-the-puppet",
+    "thumbnail": "https://www.madkidgames.com/games/beat-the-puppet/thumb_2.jpg",
+    "description": "Unleash your stress by hitting and throwing the puppet in this fun physics game."
+  },
+  {
+    "id": "stick-war-legacy",
+    "name": "Stick War: Legacy",
+    "url": "https://www.madkidgames.com/full/stick-war-legacy",
+    "thumbnail": "https://www.madkidgames.com/games/stick-war-legacy/thumb_2.jpg",
+    "description": "Command your stickman army and conquer territories in this classic strategy game."
+  },
+  {
+    "id": "cargo-truck-simulator",
+    "name": "Cargo Truck Simulator",
+    "url": "https://www.madkidgames.com/full/cargo-truck-simulator",
+    "thumbnail": "https://www.madkidgames.com/games/cargo-truck-simulator/thumb_2.jpg",
+    "description": "Drive heavy trucks and deliver cargo across challenging terrains."
+  },
+  {
+    "id": "security-simulator",
+    "name": "Security Simulator",
+    "url": "https://www.madkidgames.com/full/security-simulator",
+    "thumbnail": "https://www.madkidgames.com/games/security-simulator/thumb_2.jpg",
+    "description": "Take on the role of a security guard and keep the premises safe."
   }
 ]
