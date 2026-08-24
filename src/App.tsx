@@ -443,15 +443,6 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-3 md:gap-4">
-            <button
-              onClick={() => {
-                setShowAboutUs(true);
-                window.scrollTo(0, 0);
-              }}
-              className="text-xs uppercase font-bold text-frog-light/70 hover:text-frog-main transition-colors px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 tracking-wider cursor-pointer"
-            >
-              About
-            </button>
             <div className="hidden md:flex flex-col items-end leading-tight shrink-0">
               <span className="text-sm font-black text-frog-main uppercase tracking-tight">Panic Mode</span>
               <span className="text-[11px] text-frog-light/90 uppercase font-bold mt-1 flex items-center gap-1.5">
