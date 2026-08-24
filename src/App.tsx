@@ -5,10 +5,33 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Gamepad2, X, Ghost, Play, ShieldAlert, Maximize, Search, ExternalLink, VolumeX, Volume2 } from "lucide-react";
+import { 
+  Gamepad2, 
+  X, 
+  Ghost, 
+  Play, 
+  ShieldAlert, 
+  Maximize, 
+  Search, 
+  ExternalLink, 
+  VolumeX, 
+  Volume2,
+  Sparkles,
+  Swords,
+  Zap,
+  Compass,
+  Brain,
+  Car,
+  Target,
+  Trophy,
+  Box,
+  ChevronLeft,
+  ChevronRight,
+  Layers
+} from "lucide-react";
 import { PrivacyPolicy } from "./components/PrivacyPolicy";
+import { AboutUs } from "./components/AboutUs";
 import { Contact } from "./components/Contact";
-import { BlogPage } from "./components/BlogPage";
 import { GameReviewGenerator } from "./components/GameReviewGenerator";
 import initialGamesData from "./data/games.json";
 
@@ -20,6 +43,31 @@ interface Game {
   description: string;
   category?: string;
 }
+
+const getCategoryIcon = (category: string) => {
+  switch (category.toLowerCase()) {
+    case "all":
+      return Sparkles;
+    case "action":
+      return Swords;
+    case "arcade":
+      return Zap;
+    case "adventure":
+      return Compass;
+    case "puzzle":
+      return Brain;
+    case "racing":
+      return Car;
+    case "simulator":
+      return Box;
+    case "strategy":
+      return Target;
+    case "sports":
+      return Trophy;
+    default:
+      return Gamepad2;
+  }
+};
 
 // Variations for Panic Mode Disguise
 const WIKIPEDIA_ARTICLES = [
@@ -149,8 +197,8 @@ export default function App() {
   const [showInterstitial, setShowInterstitial] = useState(false);
   const [isPanicActive, setIsPanicActive] = useState(false);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [showAboutUs, setShowAboutUs] = useState(false);
   const [showContact, setShowContact] = useState(false);
-  const [showBlog, setShowBlog] = useState(false);
   const [isGameLoading, setIsGameLoading] = useState(false);
   const [loadingTime, setLoadingTime] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -241,14 +289,34 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollCategories = (direction: "left" | "right") => {
+    if (categoryScrollRef.current) {
+      const amount = direction === "left" ? -260 : 260;
+      categoryScrollRef.current.scrollBy({ left: amount, behavior: "smooth" });
+    }
+  };
+
   const categories = useMemo(() => {
-    const cats = new Set(games.map(g => g.category));
-    return ["All", ...Array.from(cats)].sort((a, b) => {
-      if (a === "All") return -1;
-      if (b === "All") return 1;
-      return a.localeCompare(b);
+    const cats = new Set<string>();
+    games.forEach(g => {
+      if (typeof g?.category === "string" && g.category.trim().length > 0) {
+        cats.add(g.category.trim());
+      }
     });
-  }, []);
+    return ["All", ...Array.from(cats).sort((a, b) => a.localeCompare(b))];
+  }, [games]);
+
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: games.length };
+    games.forEach(g => {
+      if (g.category) {
+        counts[g.category] = (counts[g.category] || 0) + 1;
+      }
+    });
+    return counts;
+  }, [games]);
 
   const filteredGames = useMemo(() => {
     const query = debouncedSearchQuery.toLowerCase().trim();
@@ -274,6 +342,20 @@ export default function App() {
   }, [games]);
   return (
     <div className="min-h-screen font-sans bg-frog-dark">
+      {/* About Us Overlay */}
+      <AnimatePresence>
+        {showAboutUs && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100]"
+          >
+            <AboutUs onClose={() => setShowAboutUs(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Privacy Policy Overlay */}
       <AnimatePresence>
         {showPrivacyPolicy && (
@@ -299,13 +381,6 @@ export default function App() {
           >
             <Contact onClose={() => setShowContact(false)} />
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Blog Overlay */}
-      <AnimatePresence>
-        {showBlog && (
-          <BlogPage onClose={() => setShowBlog(false)} />
         )}
       </AnimatePresence>
 
@@ -367,14 +442,17 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             <button
-              onClick={() => setShowBlog(true)}
-              className="hidden md:block px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-xl text-xs font-bold text-frog-light uppercase tracking-widest transition-all"
+              onClick={() => {
+                setShowAboutUs(true);
+                window.scrollTo(0, 0);
+              }}
+              className="text-xs uppercase font-bold text-frog-light/70 hover:text-frog-main transition-colors px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 tracking-wider cursor-pointer"
             >
-              Guides & Blog
+              About
             </button>
-            <div className="hidden md:flex flex-col items-end leading-tight shrink-0 pl-4 border-l border-white/5">
+            <div className="hidden md:flex flex-col items-end leading-tight shrink-0">
               <span className="text-sm font-black text-frog-main uppercase tracking-tight">Panic Mode</span>
               <span className="text-[11px] text-frog-light/90 uppercase font-bold mt-1 flex items-center gap-1.5">
                 Press <span className="bg-frog-main text-black px-2 py-0.5 rounded font-mono text-xs shadow-sm ring-2 ring-frog-main/20">`</span> key to hide
@@ -384,22 +462,94 @@ export default function App() {
         </div>
       </nav>
 
+      {/* Intro Section */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-surface/80 via-frog-dark to-frog-dark border-b border-border/60 px-6 py-8 md:py-10">
+        {/* Subtle decorative glow */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-frog-main/10 rounded-full blur-3xl pointer-events-none -z-0" />
+        <div className="absolute top-0 right-10 w-64 h-64 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none -z-0" />
+
+        <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="space-y-3 max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-frog-main/10 border border-frog-main/20 backdrop-blur-md text-[11px] font-black uppercase tracking-widest text-frog-main">
+              <span className="w-2 h-2 rounded-full bg-frog-main animate-pulse" />
+              Instant Browser Play
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-black tracking-tight text-white uppercase leading-tight">
+              Play Free Unblocked <span className="text-transparent bg-clip-text bg-gradient-to-r from-frog-main via-emerald-400 to-lime-300">Games Anytime</span>
+            </h2>
+
+            <p className="text-sm md:text-base text-frog-light/90 leading-relaxed font-sans font-medium">
+              Frog Games is your go-to destination for hundreds of free browser games — no downloads, no sign-up required. From action shooters and puzzles to multiplayer IO games, there's something for everyone. Just pick a game and start playing instantly.
+            </p>
+          </div>
+
+          {/* Quick Stats / Feature Badges */}
+          <div className="grid grid-cols-3 md:flex md:flex-col gap-2.5 shrink-0">
+            <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 backdrop-blur-sm">
+              <div className="text-xs font-bold text-frog-main">100+</div>
+              <div className="text-[10px] uppercase font-semibold text-frog-light/70 tracking-wider">Free Games</div>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 backdrop-blur-sm">
+              <div className="text-xs font-bold text-white">0s</div>
+              <div className="text-[10px] uppercase font-semibold text-frog-light/70 tracking-wider">No Download</div>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 backdrop-blur-sm">
+              <div className="text-xs font-bold text-white">100%</div>
+              <div className="text-[10px] uppercase font-semibold text-frog-light/70 tracking-wider">Unblocked</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Category Navigation */}
-      <div className="sticky top-[77px] z-30 bg-frog-dark/80 backdrop-blur-md border-b border-white/5 px-6 py-3">
-        <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all shrink-0 border ${
-                selectedCategory === cat
-                ? 'bg-frog-main text-black border-frog-main shadow-[0_0_15px_rgba(163,230,53,0.3)]'
-                : 'bg-white/5 text-frog-light border-white/5 hover:border-white/20'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+      <div className="sticky top-[77px] z-30 bg-frog-dark/90 backdrop-blur-xl border-b border-white/10 px-4 md:px-6 py-2.5 shadow-lg shadow-black/20">
+        <div className="max-w-7xl mx-auto flex items-center gap-2">
+          {/* Scroll Left Button */}
+          <button
+            onClick={() => scrollCategories("left")}
+            aria-label="Scroll categories left"
+            className="hidden md:flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 hover:bg-white/15 text-frog-light/70 hover:text-white border border-white/5 transition-all shrink-0 cursor-pointer"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+
+          {/* Category Track */}
+          <div 
+            ref={categoryScrollRef}
+            className="flex-1 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth py-1"
+          >
+            {categories.map((cat) => {
+              const Icon = getCategoryIcon(cat);
+              const isSelected = selectedCategory === cat;
+
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`group relative flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-display font-extrabold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer border ${
+                    isSelected
+                      ? 'bg-frog-main text-black border-frog-main shadow-[0_0_20px_rgba(163,230,53,0.35)] scale-[1.02]'
+                      : 'bg-white/5 text-frog-light/85 border-white/5 hover:border-frog-main/40 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  <Icon className={`w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110 shrink-0 ${
+                    isSelected ? 'text-black stroke-[2.5]' : 'text-frog-main'
+                  }`} />
+                  <span className="whitespace-nowrap">{cat}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Scroll Right Button */}
+          <button
+            onClick={() => scrollCategories("right")}
+            aria-label="Scroll categories right"
+            className="hidden md:flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 hover:bg-white/15 text-frog-light/70 hover:text-white border border-white/5 transition-all shrink-0 cursor-pointer"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       </div>
 
@@ -514,16 +664,25 @@ export default function App() {
           <div className="flex gap-6">
             <button 
               onClick={() => {
+                setShowAboutUs(true);
+                window.scrollTo(0, 0);
+              }}
+              className="text-[10px] uppercase font-bold text-frog-light/60 hover:text-frog-main transition-colors tracking-widest cursor-pointer"
+            >
+              About Us
+            </button>
+            <button 
+              onClick={() => {
                 setShowPrivacyPolicy(true);
                 window.scrollTo(0, 0);
               }}
-              className="text-[10px] uppercase font-bold text-frog-light/60 hover:text-frog-main transition-colors tracking-widest"
+              className="text-[10px] uppercase font-bold text-frog-light/60 hover:text-frog-main transition-colors tracking-widest cursor-pointer"
             >
               Privacy Policy
             </button>
             <button 
               onClick={() => setShowContact(true)}
-              className="text-[10px] uppercase font-bold text-frog-light/60 hover:text-frog-main transition-colors tracking-widest"
+              className="text-[10px] uppercase font-bold text-frog-light/60 hover:text-frog-main transition-colors tracking-widest cursor-pointer"
             >
               Contact Pond
             </button>
@@ -539,7 +698,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black flex flex-col overflow-y-auto w-full"
+            className="fixed inset-0 z-50 bg-black flex flex-col overflow-y-auto w-full custom-scrollbar"
           >
             <div className="p-4 shrink-0 flex items-center justify-between border-b border-white/10 sticky top-0 bg-black/95 backdrop-blur-md z-40">
               <div className="flex items-center gap-3">
@@ -743,7 +902,7 @@ function GameCard({ game, isLarge, onClick }: GameCardProps) {
         <h4 className="text-base font-display font-bold group-hover:text-frog-main transition-colors truncate">
           {game.name}
         </h4>
-        <p className="text-[12px] text-frog-light line-clamp-1 mt-1 font-medium italic">
+        <p className="text-[12px] text-frog-light line-clamp-2 mt-1 font-normal leading-relaxed opacity-90">
           {game.description}
         </p>
       </div>
